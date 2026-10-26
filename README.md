@@ -98,8 +98,8 @@ is a serverless detection and response pipeline for a single AWS account,
 deployed entirely with Terraform and proven against a live deployment.
 
 ```
-Detect:  CloudTrail ──► EventBridge rules ──► Lambda ──► S3 incident reports (JSON)
-Health:  EventBridge Scheduler ──► Lambda ──► GetTrailStatus ──► CRITICAL incident if the trail stops
+Detect:  CloudTrail ─► EventBridge rules ─► Lambda ─► S3 incident report (JSON)
+Health:  Scheduler (5 min) ─► Lambda ─► GetTrailStatus ─► CRITICAL if trail stops
 ```
 
 | | |
