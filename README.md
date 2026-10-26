@@ -1,7 +1,7 @@
 <!--
   Profile README for github.com/ahmedhany-cys
   Palette (Tokyo Night): background #0D1117 · accent #7AA2F7 · text #C0CAF5
-  Every card below is generated live from GitHub data. Nothing is hard-coded.
+  The stats cards and badges are generated live; the project facts come from the linked repository.
   To change the headline lines, edit the `lines=` parameter of the typing SVG.
 -->
 
@@ -105,8 +105,8 @@ Health:  Scheduler (5 min) ─► Lambda ─► GetTrailStatus ─► CRITICAL i
 | | |
 |---|---|
 | 🔍 **Detects** | IAM policy changes, CloudTrail tampering and S3 permission changes via EventBridge rules, plus a scheduled trail health check that closes the `StopLogging` blind spot found during testing |
-| ⚡ **Responds** | A Python Lambda classifies each event (severity, category, recommended actions), sanitises credentials out of the record, and writes an idempotent JSON incident report to S3 |
-| 🧪 **Proven** | Seven controlled end-to-end scenarios run against the deployed stack, 32 unit tests, and redacted CLI evidence plus console screenshots committed in the repo |
+| ⚡ **Responds** | A Python Lambda classifies each event (severity, category, recommended actions), sanitizes credentials out of the record, and writes an idempotent JSON incident report to S3 |
+| 🧪 **Proven** | Seven controlled end-to-end scenarios run against the deployed stack (six passed, one partial with a documented cause), 32 unit tests, and redacted CLI evidence plus console screenshots committed in the repo |
 | 🔐 **Hardened** | Least-privilege IAM for every role, TLS-only encrypted and versioned buckets, Block Public Access everywhere, no hard-coded account IDs |
 | 💸 **Cost** | $0/month by design: one trail, management events only, always-free Lambda and EventBridge limits |
 
@@ -154,5 +154,5 @@ Lessons from shipping and testing real detections:
 <br/>
 
 <div align="center">
-  <sub>Built in the open. Every stat on this page is live, and every claim links to the code that backs it.</sub>
+  <sub>Built in the open. The stats cards are generated live; the project claims are backed by the linked repository and its docs.</sub>
 </div>
