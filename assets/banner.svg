@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="t d">
   <title id="t">Ahmed Hany — cloud security and detection engineering</title>
-  <desc id="d">A signal pulse travels through CloudTrail, EventBridge and Lambda and ends in an S3 incident report.</desc>
+  <desc id="d">A signal pulse travels from logs through detection and response and ends in an incident report.</desc>
   <defs>
     <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
       <circle cx="1" cy="1" r="1" fill="#21262D"/>
@@ -62,19 +62,19 @@
   <g class="mono" font-size="14" text-anchor="middle">
     <rect x="672" y="106" width="64" height="64" rx="14" fill="#161B22" stroke="#30363D" stroke-width="2"/>
     <path d="M690 126h28M690 138h28M690 150h18" stroke="#7AA2F7" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-    <text x="704" y="200" fill="#8B949E">CloudTrail</text>
+    <text x="704" y="200" fill="#8B949E">logs</text>
 
     <rect x="790" y="106" width="64" height="64" rx="14" fill="#161B22" stroke="#30363D" stroke-width="2"/>
     <path d="M806 138h10l4-10 8 20 4-10h10" stroke="#7AA2F7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    <text x="822" y="200" fill="#8B949E">EventBridge</text>
+    <text x="822" y="200" fill="#8B949E">detect</text>
 
     <rect x="908" y="106" width="64" height="64" rx="14" fill="#161B22" stroke="#7AA2F7" stroke-width="2"/>
     <path d="M928 154l9-20-4-8h7l12 28" stroke="#7AA2F7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    <text x="940" y="200" fill="#8B949E">Lambda</text>
+    <text x="940" y="200" fill="#8B949E">respond</text>
 
     <rect class="alert" x="1028" y="106" width="64" height="64" rx="14" fill="#FF9E64" stroke="#FF9E64" stroke-width="2"/>
     <path d="M1060 124l14 25h-28z" stroke="#FF9E64" stroke-width="2.4" stroke-linejoin="round" fill="none"/>
     <path d="M1060 133v7M1060 144v.5" stroke="#FF9E64" stroke-width="2.4" stroke-linecap="round"/>
-    <text x="1060" y="200" fill="#FF9E64">S3 report</text>
+    <text x="1060" y="200" fill="#FF9E64">report</text>
   </g>
 </svg>

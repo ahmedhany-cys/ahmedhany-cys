@@ -6,26 +6,24 @@
     accent  #7AA2F7 (links, titles) alert   #FF9E64 (severity, streak fire only)
     text    #C0CAF5 / #8B949E
 
-  Everything below is real: stats cards are generated live, project claims link to
-  the repository docs that back them. To change the rotating headline, edit the
-  `lines=` parameter of the typing SVG. The contribution snake is produced by
-  .github/workflows/snake.yml on the `output` branch.
+  Generated images
+    assets/achievements.svg   .github/workflows/achievements.yml (daily, earned achievements only)
+    snake on `output` branch  .github/workflows/snake.yml (daily)
+  To change the rotating headline, edit the `lines=` parameter of the typing SVG.
 -->
 
 <a id="top"></a>
 
 <div align="center">
 
-<img src="./assets/banner.svg" width="100%" alt="Ahmed Hany — cloud security and detection engineering. A pulse moves from CloudTrail through EventBridge and Lambda into an S3 incident report." />
+<img src="./assets/banner.svg" width="100%" alt="Ahmed Hany — cloud security and detection engineering. A pulse moves from logs through detection and response into an incident report." />
 
-<a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3200&pause=1200&color=7AA2F7&center=true&vCenter=true&width=640&height=48&lines=Turning+CloudTrail+into+incident+reports;Detection+engineering+on+AWS;Least-privilege+infrastructure+in+Terraform;Tested+against+a+live+account%2C+not+just+deployed" alt="Turning CloudTrail into incident reports. Detection engineering on AWS. Least-privilege infrastructure in Terraform. Tested against a live account, not just deployed." />
-</a>
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3200&pause=1200&color=7AA2F7&center=true&vCenter=true&width=640&height=48&lines=Hi%2C+I'm+Ahmed+Hany;I+build+security+tooling+on+AWS;Detection+engineering+%C2%B7+IaC+%C2%B7+automation;I+test+what+I+ship" alt="Hi, I'm Ahmed Hany. I build security tooling on AWS. Detection engineering, infrastructure as code, automation. I test what I ship." />
 
 <p>
   <a href="#about-me"><img src="https://img.shields.io/badge/About-161B22?style=flat-square" alt="About" /></a>
   <a href="#tech-stack"><img src="https://img.shields.io/badge/Tech%20stack-161B22?style=flat-square" alt="Tech stack" /></a>
-  <a href="#featured-project"><img src="https://img.shields.io/badge/Projects-161B22?style=flat-square" alt="Projects" /></a>
+  <a href="#projects"><img src="https://img.shields.io/badge/Projects-161B22?style=flat-square" alt="Projects" /></a>
   <a href="#achievements"><img src="https://img.shields.io/badge/Achievements-161B22?style=flat-square" alt="Achievements" /></a>
   <a href="#github-statistics"><img src="https://img.shields.io/badge/Statistics-161B22?style=flat-square" alt="Statistics" /></a>
   <a href="#contact"><img src="https://img.shields.io/badge/Contact-161B22?style=flat-square" alt="Contact" /></a>
@@ -35,30 +33,31 @@
 
 ## About me
 
-I build cloud security tooling on AWS, and I care about proving that a detection works, not just that it deploys. My focus is **detection engineering and automated incident response**: turning CloudTrail activity into structured, actionable incident reports with serverless, least-privilege infrastructure defined entirely in Terraform.
+I'm Ahmed, and I work on the security side of the cloud. I like building things that notice when something goes wrong and explain it clearly: detections, automated responses and the infrastructure underneath them, all written as code. I care about proving that what I build actually works, so I test against real environments and write down what I learn, including the limitations.
+
+**What I work on**
 
 <table>
   <tr>
-    <td width="50%" valign="top"><sub><code>building</code></sub><br/>Serverless security monitoring on AWS: CloudTrail → EventBridge → Lambda → S3</td>
-    <td width="50%" valign="top"><sub><code>method</code></sub><br/>Every detection is exercised end to end against a live account, with redacted evidence committed next to the code</td>
+    <td width="50%" valign="top"><sub><code>cloud security</code></sub><br/>Securing AWS accounts: least-privilege IAM, encrypted and locked-down storage, audit logging that can't silently stop</td>
+    <td width="50%" valign="top"><sub><code>detection engineering</code></sub><br/>Turning raw activity logs into rules that fire on the events that matter, validated against what is really logged</td>
   </tr>
   <tr>
-    <td valign="top"><sub><code>constraint</code></sub><br/>The whole stack runs at $0/month inside the AWS Free Tier</td>
-    <td valign="top"><sub><code>interests</code></sub><br/>IAM and least privilege, threat detection, infrastructure as code, security automation</td>
+    <td valign="top"><sub><code>infrastructure as code</code></sub><br/>Everything defined in Terraform: repeatable, reviewable, and easy to tear down</td>
+    <td valign="top"><sub><code>automation</code></sub><br/>Python and Bash to classify events, write reports and run tests, plus CI that checks it all on every change</td>
   </tr>
 </table>
 
 <details>
-<summary><b>Principles I build with</b></summary>
+<summary><b>How I work</b></summary>
 <br/>
 
-Lessons from shipping and testing real detections:
-
-- **Test the detection, not the deployment.** A successful `terraform apply` proves nothing about whether a rule fires. Only an observed incident does.
-- **API names are not always event names.** CloudTrail logs `PutBucketPublicAccessBlock`, not `PutPublicAccessBlock`. Validate every pattern against real logged events.
-- **Least privilege is a design input, not a cleanup step.** Every role gets exactly the actions and resources it needs, and every unavoidable `*` gets a comment explaining why.
-- **Evidence leaks more than account IDs.** Source IPs, access key IDs and principal IDs are redacted before anything is committed.
+- **Test the outcome, not the deployment.** A successful `terraform apply` proves nothing about whether a rule fires. Only an observed result does.
+- **Check assumptions against reality.** API names are not always event names; CloudTrail logs `PutBucketPublicAccessBlock`, not `PutPublicAccessBlock`.
+- **Least privilege is a design input, not a cleanup step.** Every role gets exactly what it needs, and every unavoidable `*` gets a comment explaining why.
+- **Share evidence safely.** Account IDs, IPs, keys and sign-in names are redacted before anything is published.
 - **Write down the limitations.** A partial result with a documented cause is worth more than a green check nobody can trust.
+- **Keep it cheap.** I like constraints such as running a whole stack inside the AWS Free Tier.
 
 </details>
 
@@ -118,68 +117,45 @@ Lessons from shipping and testing real detections:
 
 <div align="right"><a href="#top"><sub>back to top ↑</sub></a></div>
 
-## Featured project
+## Projects
 
-<a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response">
-  <img src="./assets/project-incident-preview.png" width="100%" alt="Incident report JSON written to S3 for test T5 (DeleteBucketPublicAccessBlock), with the account ID and source IP redacted" />
-</a>
+<table>
+  <tr>
+    <td>
+      <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response"><b>aws-cloud-security-incident-response</b></a>
+      &nbsp;<a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ahmedhany-cys/aws-cloud-security-incident-response/ci.yml?branch=main&style=flat-square&label=CI&labelColor=161B22" alt="CI status" /></a>
+      <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/blob/main/LICENSE"><img src="https://img.shields.io/github/license/ahmedhany-cys/aws-cloud-security-incident-response?style=flat-square&labelColor=161B22&color=7AA2F7" alt="MIT license" /></a>
+      <br/>
+      Serverless AWS security monitoring and automated incident response: CloudTrail events are matched by EventBridge rules, classified by a Python Lambda and written to S3 as JSON incident reports.
+      <br/><br/>
+      <sub><code>Python</code> · <code>Terraform</code> · <code>CloudTrail</code> · <code>EventBridge</code> · <code>Lambda</code> · <code>S3</code> · <code>IAM</code></sub>
+      <br/><br/>
+      <b>Interesting because:</b> live testing exposed a real blind spot (an attacker calling <code>StopLogging</code> silences the trail), closed with a 5-minute health check. Seven end-to-end scenarios against a real account, 32 unit tests, and the whole stack runs at $0/month.
+    </td>
+  </tr>
+</table>
 
-### [aws-cloud-security-incident-response](https://github.com/ahmedhany-cys/aws-cloud-security-incident-response)
+<details>
+<summary><b>Preview and details</b></summary>
+<br/>
 
-**Serverless AWS security monitoring and automated incident response, deployed with Terraform and proven against a live account.**
-
-<p>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ahmedhany-cys/aws-cloud-security-incident-response/ci.yml?branch=main&style=flat-square&label=CI&labelColor=161B22" alt="CI status" /></a>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/blob/main/LICENSE"><img src="https://img.shields.io/github/license/ahmedhany-cys/aws-cloud-security-incident-response?style=flat-square&labelColor=161B22&color=7AA2F7" alt="MIT license" /></a>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/commits/main"><img src="https://img.shields.io/github/last-commit/ahmedhany-cys/aws-cloud-security-incident-response?style=flat-square&labelColor=161B22&color=7AA2F7" alt="Last commit" /></a>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/blob/main/docs/cost-notes.md"><img src="https://img.shields.io/badge/AWS%20Free%20Tier-%240%2Fmonth-2EA043?style=flat-square&labelColor=161B22" alt="Runs at $0 per month on the AWS Free Tier" /></a>
-  <img src="https://img.shields.io/badge/Python-3.12%20%7C%203.13-7AA2F7?style=flat-square&labelColor=161B22&logo=python&logoColor=white" alt="Tested on Python 3.12 and 3.13" />
-</p>
+<img src="./assets/project-incident-preview.png" width="100%" alt="Incident report JSON written to S3 for test T5 (DeleteBucketPublicAccessBlock), with the account ID and source IP redacted" />
 
 ```
 detect  CloudTrail ─► EventBridge ─► Lambda ─► S3 report
 health  every 5 min ─► GetTrailStatus ─► CRITICAL if off
 ```
 
-<table>
-  <tr><td valign="top"><b>Detects</b></td><td>IAM policy changes, CloudTrail tampering and S3 permission changes via EventBridge rules, plus a scheduled trail health check</td></tr>
-  <tr><td valign="top"><b>Responds</b></td><td>A Python Lambda classifies each event (severity, category, recommended actions), sanitizes credentials out of the record and writes an idempotent JSON incident report to S3</td></tr>
-  <tr><td valign="top"><b>Proven</b></td><td>Seven controlled end-to-end scenarios against the deployed stack (six passed, one partial with a documented cause), 32 unit tests, redacted CLI evidence and console screenshots</td></tr>
-  <tr><td valign="top"><b>Hardened</b></td><td>Least-privilege IAM for every role, TLS-only encrypted and versioned buckets, Block Public Access everywhere, no hard-coded account IDs</td></tr>
-</table>
+- **Detects** IAM policy changes, CloudTrail tampering and S3 permission changes
+- **Responds** by classifying severity, sanitizing credentials and writing an idempotent JSON report
+- **Proven** by seven controlled scenarios (six passed, one partial with a documented cause) and 32 unit tests
+- **Hardened** with least-privilege IAM, TLS-only encrypted versioned buckets and Block Public Access
 
-<p>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/blob/main/docs/architecture.md"><img src="https://img.shields.io/badge/Architecture-161B22?style=flat-square" alt="Architecture" /></a>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response#detection-rules"><img src="https://img.shields.io/badge/Detection%20rules-161B22?style=flat-square" alt="Detection rules" /></a>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/blob/main/docs/design-decisions.md"><img src="https://img.shields.io/badge/Design%20decisions-161B22?style=flat-square" alt="Design decisions" /></a>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/blob/main/docs/test-cases.md"><img src="https://img.shields.io/badge/Test%20results-161B22?style=flat-square" alt="Test results" /></a>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/blob/main/docs/incident-schema.md"><img src="https://img.shields.io/badge/Incident%20schema-161B22?style=flat-square" alt="Incident schema" /></a>
-</p>
-
-<details>
-<summary><b>Why this project is interesting</b></summary>
-<br/>
-
-- **Testing found a real blind spot.** An attacker who calls `StopLogging` silences the very trail the detections depend on. The fix is a scheduled health check that calls `GetTrailStatus` every five minutes and raises a CRITICAL incident when logging stops.
-- **Detections are validated against logged events, not API docs.** The S3 rule matches `PutBucketPublicAccessBlock` because that is what CloudTrail actually records.
-- **Reports are idempotent.** The incident ID is derived from the CloudTrail event ID, so a retried Lambda never produces duplicate incidents.
-- **Evidence is publishable.** Account IDs, source IPs, access key IDs and console sign-in names are redacted from every committed log and screenshot.
-- **CI runs without AWS credentials**: pytest on Python 3.12 and 3.13, Ruff, `terraform fmt` and `validate`, ShellCheck and a docs link check.
-
-</details>
-
-<details>
-<summary><b>Screenshots from the live deployment</b></summary>
-<br/>
-
-<p>
-  <img src="https://raw.githubusercontent.com/ahmedhany-cys/aws-cloud-security-incident-response/main/docs/screenshots/04-eventbridge-rules.png" width="49%" alt="EventBridge rules for the detections" />
-  <img src="https://raw.githubusercontent.com/ahmedhany-cys/aws-cloud-security-incident-response/main/docs/screenshots/07-lambda-log-detection.png" width="49%" alt="Lambda log line for a detection" />
-  <img src="https://raw.githubusercontent.com/ahmedhany-cys/aws-cloud-security-incident-response/main/docs/screenshots/08-incident-bucket-objects.png" width="49%" alt="Incident report objects in the S3 bucket" />
-  <img src="https://raw.githubusercontent.com/ahmedhany-cys/aws-cloud-security-incident-response/main/docs/screenshots/11-billing-free-tier.png" width="49%" alt="Billing page showing Free Tier usage" />
-</p>
-
-<sub>All screenshots are redacted. More in <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/tree/main/docs/screenshots">docs/screenshots</a>.</sub>
+<a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/blob/main/docs/architecture.md">Architecture</a> ·
+<a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response#detection-rules">Detection rules</a> ·
+<a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/blob/main/docs/design-decisions.md">Design decisions</a> ·
+<a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/blob/main/docs/test-cases.md">Test results</a> ·
+<a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/tree/main/docs/screenshots">Screenshots</a>
 
 </details>
 
@@ -187,35 +163,16 @@ health  every 5 min ─► GetTrailStatus ─► CRITICAL if off
 
 ## Achievements
 
-**Repository quality** <sub>· verifiable in the linked files</sub>
-
-<p>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ahmedhany-cys/aws-cloud-security-incident-response/ci.yml?branch=main&style=flat-square&label=CI&labelColor=161B22" alt="CI status" /></a>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/blob/main/.github/workflows/ci.yml"><img src="https://img.shields.io/badge/CI%20checks-pytest%20%C2%B7%20Ruff%20%C2%B7%20terraform%20validate%20%C2%B7%20ShellCheck%20%C2%B7%20docs%20links-7AA2F7?style=flat-square&labelColor=161B22" alt="CI checks: pytest, Ruff, terraform validate, ShellCheck, docs links" /></a>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/blob/main/docs/test-cases.md"><img src="https://img.shields.io/badge/live%20scenarios-6%20pass%20%C2%B7%201%20partial%20(documented)-7AA2F7?style=flat-square&labelColor=161B22" alt="Live end-to-end scenarios: 6 passed, 1 partial with documented cause" /></a>
-</p>
-
-**Security practice**
-
-<p>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/blob/main/SECURITY.md"><img src="https://img.shields.io/badge/policy-SECURITY.md-7AA2F7?style=flat-square&labelColor=161B22" alt="Security policy" /></a>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/blob/main/.github/dependabot.yml"><img src="https://img.shields.io/badge/Dependabot-enabled-7AA2F7?style=flat-square&labelColor=161B22&logo=dependabot&logoColor=white" alt="Dependabot enabled" /></a>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/blob/main/docs/deployer-policy.json"><img src="https://img.shields.io/badge/IAM-least%20privilege-7AA2F7?style=flat-square&labelColor=161B22" alt="Least-privilege IAM deployer policy" /></a>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/blob/main/CONTRIBUTING.md"><img src="https://img.shields.io/badge/community-CONTRIBUTING%20%C2%B7%20CODE%20OF%20CONDUCT-7AA2F7?style=flat-square&labelColor=161B22" alt="Contributing guide and code of conduct" /></a>
-</p>
-
-**Merged pull requests**
-
-- [#1](https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/pull/1) Repository polish: CI, Dependabot, license, community docs and README badges
-- [#2](https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/pull/2) Verification fixes: doc accuracy, path redaction, docs link check, Dependabot grouping
-- [#6](https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/pull/6) Redact the console sign-in name from nine screenshots
-
-**GitHub achievements** <sub>· none are public on this profile yet</sub>
-
-Earned achievements appear automatically on the profile sidebar. Nothing in this README imitates them.
+<div align="center">
+  <a href="https://github.com/ahmedhany-cys">
+    <img src="./assets/achievements.svg" width="100%" alt="GitHub achievements earned by ahmedhany-cys, with locked slots for ones not yet earned" />
+  </a>
+  <br/>
+  <sub>Real badges from my <a href="https://github.com/ahmedhany-cys">GitHub profile</a>, redrawn daily. Locked slots are ones I haven't earned yet.</sub>
+</div>
 
 <details>
-<summary><b>Not yet earned: legitimate ways to earn GitHub achievements</b></summary>
+<summary><b>How the locked ones are earned</b></summary>
 <br/>
 
 | Achievement | How it is earned |
@@ -227,7 +184,7 @@ Earned achievements appear automatically on the profile sidebar. Nothing in this
 | Galaxy Brain | Have answers accepted in GitHub Discussions |
 | Starstruck | Create a repository that reaches 16 stars |
 
-<sub>Source: <a href="https://docs.github.com/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/personalizing-your-profile#displaying-achievements-on-your-profile">GitHub Docs — achievements on your profile</a>. Achievements can also be hidden under Settings → Public profile.</sub>
+<sub>Source: <a href="https://docs.github.com/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/personalizing-your-profile#displaying-achievements-on-your-profile">GitHub Docs</a>.</sub>
 
 </details>
 
@@ -266,7 +223,6 @@ Earned achievements appear automatically on the profile sidebar. Nothing in this
 
 <div align="center">
   <a href="https://github.com/ahmedhany-cys"><img src="https://img.shields.io/badge/GitHub-ahmedhany--cys-161B22?style=for-the-badge&logo=github&logoColor=white" alt="GitHub: ahmedhany-cys" /></a>
-  <a href="https://github.com/ahmedhany-cys/aws-cloud-security-incident-response/issues"><img src="https://img.shields.io/badge/Open%20an%20issue-161B22?style=for-the-badge&logo=github&logoColor=7AA2F7" alt="Open an issue on the featured project" /></a>
   <!--
     Add verified profiles here, then move the lines out of this comment:
     <a href="https://www.linkedin.com/in/YOUR-HANDLE"><img src="https://img.shields.io/badge/LinkedIn-161B22?style=for-the-badge&logoColor=0A66C2" alt="LinkedIn" /></a>
