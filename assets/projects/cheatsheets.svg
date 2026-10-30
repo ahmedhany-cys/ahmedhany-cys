@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="t">
+  <title id="t">Security cheatsheets: a terminal listing 16 quick-reference files</title>
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#21262D"/>
+    </pattern>
+  </defs>
+  <style>
+    .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; }
+    .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif; }
+  </style>
+
+  <rect width="960" height="540" fill="#0B0F15"/>
+  <rect width="960" height="540" fill="url(#grid)"/>
+
+  <!-- terminal window -->
+  <rect x="64" y="56" width="832" height="428" rx="14" fill="#0D1117" stroke="#30363D" stroke-width="2"/>
+  <path d="M64 70a14 14 0 0 1 14-14h804a14 14 0 0 1 14 14v26H64z" fill="#161B22"/>
+  <line x1="64" y1="96" x2="896" y2="96" stroke="#30363D" stroke-width="2"/>
+  <circle cx="92" cy="76" r="6" fill="#30363D"/>
+  <circle cx="112" cy="76" r="6" fill="#30363D"/>
+  <circle cx="132" cy="76" r="6" fill="#30363D"/>
+  <text x="480" y="81" class="mono" font-size="14" fill="#8B949E" text-anchor="middle">security-cheatsheets</text>
+
+  <g class="mono" font-size="20">
+    <text x="96" y="140" fill="#7AA2F7">$ ls cheatsheets/</text>
+
+    <g fill="#C0CAF5">
+      <text x="96"  y="184">nmap.md</text>
+      <text x="96"  y="218">wireshark-filters.md</text>
+      <text x="96"  y="252">owasp-top-10.md</text>
+      <text x="96"  y="286">aws-security.md</text>
+      <text x="96"  y="320">ssh-hardening.md</text>
+      <text x="96"  y="354">openssl-tls.md</text>
+      <text x="96"  y="388">incident-response.md</text>
+      <text x="96"  y="422">log-analysis.md</text>
+
+      <text x="500" y="184">linux-commands.md</text>
+      <text x="500" y="218">git.md</text>
+      <text x="500" y="252">http-security-headers.md</text>
+      <text x="500" y="286">docker-security.md</text>
+      <text x="500" y="320">regex.md</text>
+      <text x="500" y="354">hash-identification.md</text>
+      <text x="500" y="388">common-ports.md</text>
+      <text x="500" y="422">windows-event-ids.md</text>
+    </g>
+
+    <text x="96" y="460" fill="#8B949E">16 files<tspan fill="#7AA2F7"> ▍</tspan></text>
+  </g>
+</svg>

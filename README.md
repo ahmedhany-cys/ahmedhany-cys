@@ -113,6 +113,7 @@ What I can do, and where you can check it.
 | **Cloud IAM &amp; attack paths** | Evaluate IAM the way AWS does (explicit deny, boundaries, cross-account trust, conditions) and turn misconfigurations into attack paths with least-privilege fixes | [Attack Path Analyzer](https://github.com/ahmedhany-cys/aws-cloud-attack-path-analyzer) |
 | **Threat detection** | Write detection rules over CloudTrail and GuardDuty, mapped to MITRE ATT&amp;CK, each with a confidence level and benign explanations to rule out | [CloudSentinel](https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response) · [Incident response](https://github.com/ahmedhany-cys/aws-cloud-security-incident-response) |
 | **Incident response** | Correlate events into timelines, estimate blast radius, and run containment only through dry runs, separate-person approval and rollback | [CloudSentinel](https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response) |
+| **Digital forensics &amp; malware analysis** <sub>`new`</sub> | Parse EVTX logs, browser history and PE files, write YARA rules, extract IOCs, rebuild a UTC timeline, and keep a hash-chained chain of custody | [TraceForge](https://github.com/ahmedhany-cys/traceforge-digital-forensics) |
 | **Software supply chain** <sub>`new`</sub> | Generate CycloneDX SBOMs, check them against OSV, verify Sigstore signatures and SLSA v1 provenance, and gate releases on policy | [SupplyChain Sentinel](https://github.com/ahmedhany-cys/azure-supplychain-sentinel) |
 | **Secure IaC &amp; policy as code** | Generate Terraform from requirements and block it with deterministic policies over the plan JSON, alongside Checkov and Trivy | [Infrastructure as Prompt](https://github.com/ahmedhany-cys/infrastructure-as-prompt) |
 | **Cyber resilience** <sub>`new`</sub> | Model system dependencies, check backups against RTO/RPO, simulate ransomware and admin compromise, and plan a safe recovery order | [RecoveryProof](https://github.com/ahmedhany-cys/recoveryproof) |
@@ -174,6 +175,9 @@ What I can do, and where you can check it.
       <a href="https://github.com/gitleaks/gitleaks"><img src="https://img.shields.io/badge/Gitleaks-161B22?style=flat-square" alt="Gitleaks" /></a>
       <a href="https://bandit.readthedocs.io/"><img src="https://img.shields.io/badge/Bandit-161B22?style=flat-square" alt="Bandit" /></a>
       <a href="https://pypi.org/project/pip-audit/"><img src="https://img.shields.io/badge/pip--audit-161B22?style=flat-square" alt="pip-audit" /></a>
+      <a href="https://yara.readthedocs.io/"><img src="https://img.shields.io/badge/YARA-161B22?style=flat-square" alt="YARA" /></a>
+      <a href="https://github.com/erocarrera/pefile"><img src="https://img.shields.io/badge/pefile-161B22?style=flat-square" alt="pefile" /></a>
+      <a href="https://github.com/williballenthin/python-evtx"><img src="https://img.shields.io/badge/python--evtx-161B22?style=flat-square" alt="python-evtx" /></a>
     </td>
   </tr>
   <tr>
@@ -260,11 +264,27 @@ Ordered by the stage of the security lifecycle each one covers, from shipping co
       <br/><sub><code>Python</code> · <code>FastAPI</code> · <code>React</code> · <code>GuardDuty</code> · <code>Terraform</code></sub>
     </td>
     <td width="50%" valign="top">
-      <sub><code>05 · recover</code> &nbsp;Could we actually come back from it?</sub><br/>
+      <sub><code>05 · investigate</code> &nbsp;What does the evidence prove?</sub><br/>
+      <a href="https://github.com/ahmedhany-cys/traceforge-digital-forensics"><img src="./assets/projects/traceforge.jpg" width="100%" alt="TraceForge investigation dashboard with the simulated Meridian case" /></a>
+      <br/><a href="https://github.com/ahmedhany-cys/traceforge-digital-forensics"><b>TraceForge</b></a> <sub><code>new</code></sub>
+      <br/>Digital forensics platform: EVTX, browser, log and PE analysis, <b>YARA</b>, IOC extraction and an explainable cross-source timeline, with a hash-chained chain of custody.
+      <br/><sub><code>Python</code> · <code>FastAPI</code> · <code>React</code> · <code>YARA</code> · <code>pefile</code></sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <sub><code>06 · recover</code> &nbsp;Could we actually come back from it?</sub><br/>
       <a href="https://github.com/ahmedhany-cys/recoveryproof"><img src="./assets/projects/recoveryproof.jpg" width="100%" alt="RecoveryProof executive overview with a readiness score" /></a>
       <br/><a href="https://github.com/ahmedhany-cys/recoveryproof"><b>RecoveryProof</b></a> <sub><code>new</code></sub>
       <br/>Evidence-based disaster-recovery analysis: RTO/RPO compliance, dependency-aware recovery order and <b>10 incident scenarios</b>, including ransomware.
       <br/><sub><code>Python</code> · <code>Streamlit</code> · <code>NetworkX</code> · <code>Plotly</code></sub>
+    </td>
+    <td width="50%" valign="top">
+      <sub><code>reference</code> &nbsp;The notes I keep open while I work</sub><br/>
+      <a href="https://github.com/ahmedhany-cys/security-cheatsheets"><img src="./assets/projects/cheatsheets.svg" width="100%" alt="Terminal listing the 16 security cheatsheet files" /></a>
+      <br/><a href="https://github.com/ahmedhany-cys/security-cheatsheets"><b>Security Cheatsheets</b></a>
+      <br/><b>16 quick references</b> for everyday security work: Nmap, Wireshark filters, OWASP Top 10, AWS CLI, TLS, Windows event IDs and more.
+      <br/><sub><code>Markdown</code> · <code>Nmap</code> · <code>Wireshark</code> · <code>AWS CLI</code></sub>
     </td>
   </tr>
 </table>
