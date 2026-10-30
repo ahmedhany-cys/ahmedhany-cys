@@ -7,7 +7,7 @@
     text    #C0CAF5 / #8B949E
     Azure badges use labelColor 0078D4, AWS badges use 232F3E.
 
-  Layout: who I am → what I can do → tools → work (by lifecycle stage) → how I work → activity → contact.
+  Layout: who I am → featured project → what I can do → tools → work (by lifecycle stage) → how I work → activity → contact.
   Adding a project: put it in the lifecycle row it belongs to, keep two cards per row.
 
   Generated images
@@ -26,6 +26,7 @@
 
 <p>
   <a href="#about-me"><img src="https://img.shields.io/badge/About-161B22?style=flat-square" alt="About" /></a>
+  <a href="#featured"><img src="https://img.shields.io/badge/Featured-161B22?style=flat-square" alt="Featured" /></a>
   <a href="#skills"><img src="https://img.shields.io/badge/Skills-161B22?style=flat-square" alt="Skills" /></a>
   <a href="#tech-stack"><img src="https://img.shields.io/badge/Tech%20stack-161B22?style=flat-square" alt="Tech stack" /></a>
   <a href="#selected-work"><img src="https://img.shields.io/badge/Selected%20work-161B22?style=flat-square" alt="Selected work" /></a>
@@ -61,6 +62,45 @@ Most of my work lives on AWS, and lately on Azure too. I write it in Python and 
     </td>
   </tr>
 </table>
+
+<div align="right"><a href="#top"><sub>back to top ↑</sub></a></div>
+
+## Featured
+
+<sub><code>featured project</code> &nbsp;<code>04 · respond</code></sub>
+
+### [CloudSentinel](https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response)
+
+**AWS threat detection, incident investigation and approval-controlled response.**
+A suspicious credential is enumerating resources, escalating privileges and reading S3 data. CloudSentinel takes the raw CloudTrail and GuardDuty signals and answers what happened, in what order, what was affected, how sure we are, and what to do next without breaking production.
+
+<a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response"><img src="./assets/featured/cloudsentinel-hero.jpg" width="100%" alt="CloudSentinel security overview dashboard in simulation mode with synthetic data" /></a>
+
+<table>
+  <tr>
+    <td width="33%" valign="top"><img src="./assets/featured/incident-details.jpg" width="100%" alt="Incident investigation with facts, indicators, hypotheses and blast radius" /><br/><sub><b>Investigate</b>: facts, indicators and hypotheses kept separate</sub></td>
+    <td width="33%" valign="top"><img src="./assets/featured/attack-timeline.jpg" width="100%" alt="Attack timeline with linked detections" /><br/><sub><b>Reconstruct</b>: ordered attack timeline with linked detections</sub></td>
+    <td width="33%" valign="top"><img src="./assets/featured/response-approval.jpg" width="100%" alt="Containment approval request awaiting a second responder" /><br/><sub><b>Respond</b>: dry run, second-person approval, rollback</sub></td>
+  </tr>
+</table>
+
+<p>
+  <img src="https://img.shields.io/badge/detection%20rules-17%20%C2%B7%20MITRE%20ATT%26CK-7AA2F7?style=flat-square&labelColor=161B22" alt="17 detection rules mapped to MITRE ATT&amp;CK" />
+  <img src="https://img.shields.io/badge/scenarios-5%20reproducible-7AA2F7?style=flat-square&labelColor=161B22" alt="5 reproducible scenarios" />
+  <img src="https://img.shields.io/badge/tests-157%20passing-7AA2F7?style=flat-square&labelColor=161B22" alt="157 passing tests" />
+  <img src="https://img.shields.io/badge/backend%20coverage-91%25-7AA2F7?style=flat-square&labelColor=161B22" alt="91% backend line coverage" />
+  <img src="https://img.shields.io/badge/audit%20log-hash--chained-7AA2F7?style=flat-square&labelColor=161B22" alt="hash-chained audit log" />
+</p>
+<sub><code>Python</code> · <code>FastAPI</code> · <code>React 19</code> · <code>TypeScript</code> · <code>Terraform</code> · <code>CloudTrail</code> · <code>GuardDuty</code> · <code>EventBridge</code> · <code>Lambda</code> · <code>Playwright</code></sub>
+<br/><br/>
+<a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response#five-reproducible-scenarios">Scenarios</a> ·
+<a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response/blob/main/docs/detection-rules.md">Detection rules</a> ·
+<a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response/blob/main/docs/architecture.md">Architecture</a> ·
+<a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response/blob/main/docs/threat-model.md">Threat model</a> ·
+<a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response/blob/main/docs/testing.md">Test results</a> ·
+<a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response/tree/main/docs/sample-reports">Sample reports</a>
+<br/>
+<sub>Screenshots are from simulation mode with synthetic data, not real AWS detections or containment.</sub>
 
 <div align="right"><a href="#top"><sub>back to top ↑</sub></a></div>
 
@@ -215,7 +255,7 @@ Ordered by the stage of the security lifecycle each one covers, from shipping co
     <td width="50%" valign="top">
       <sub><code>04 · respond</code> &nbsp;What happened, and what do we do now?</sub><br/>
       <a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response"><img src="./assets/projects/cloudsentinel.jpg" width="100%" alt="CloudSentinel security overview dashboard in simulation mode" /></a>
-      <br/><a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response"><b>CloudSentinel</b></a> <sub><code>new</code></sub>
+      <br/><a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response"><b>CloudSentinel</b></a> <sub><code>new</code> <a href="#featured"><code>featured</code></a></sub>
       <br/>AWS threat detection and investigation: <b>17 rules mapped to MITRE ATT&amp;CK</b>, incident timelines, blast radius, and approval-gated containment with rollback.
       <br/><sub><code>Python</code> · <code>FastAPI</code> · <code>React</code> · <code>GuardDuty</code> · <code>Terraform</code></sub>
     </td>
