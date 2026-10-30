@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="t d">
-  <title id="t">Ahmed Hany — cloud security and detection engineering</title>
+  <title id="t">Ahmed Hany — cloud security engineer, AWS and Azure</title>
   <desc id="d">A signal pulse travels from logs through detection and response and ends in an incident report.</desc>
   <defs>
     <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
@@ -48,9 +48,10 @@
   <rect x="1" y="1" width="1198" height="298" rx="16" fill="none" stroke="#21262D" stroke-width="2"/>
 
   <!-- identity -->
-  <text x="64" y="104" class="mono" font-size="20" fill="#7AA2F7">$ whoami<tspan class="cursor" fill="#C0CAF5"> ▍</tspan></text>
-  <text x="62" y="172" class="sans" font-size="60" font-weight="700" fill="#E6EDF3" letter-spacing="-1.5">Ahmed Hany</text>
-  <text x="64" y="216" class="sans" font-size="24" fill="#8B949E">Cloud security · Detection engineering · AWS</text>
+  <text x="64" y="92" class="mono" font-size="20" fill="#7AA2F7">$ whoami<tspan class="cursor" fill="#C0CAF5"> ▍</tspan></text>
+  <text x="62" y="160" class="sans" font-size="60" font-weight="700" fill="#E6EDF3" letter-spacing="-1.5">Ahmed Hany</text>
+  <text x="64" y="204" class="sans" font-size="24" fill="#8B949E">Cloud security engineer · AWS · Azure</text>
+  <text x="64" y="244" class="mono" font-size="15" fill="#7AA2F7">build<tspan fill="#484F58"> → </tspan>harden<tspan fill="#484F58"> → </tspan>detect<tspan fill="#484F58"> → </tspan>respond<tspan fill="#484F58"> → </tspan>recover</text>
 
   <!-- pipeline: CloudTrail → EventBridge → Lambda → S3 incident -->
   <line x1="704" y1="138" x2="1060" y2="138" stroke="#30363D" stroke-width="2"/>
