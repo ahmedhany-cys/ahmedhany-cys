@@ -164,6 +164,7 @@ Ordered by the stage of the security lifecycle each one covers, from shipping co
       <br/><a href="https://github.com/ahmedhany-cys/infrastructure-as-prompt"><b>Infrastructure as Prompt</b></a>
       <br/>Plain-English requirements become traceable AWS requirements and reviewed Terraform, gated by <b>38 deterministic policies</b> over the plan JSON.
       <br/><sub><code>Python</code> · <code>Terraform</code> · <code>React</code> · <code>Checkov</code> · <code>Trivy</code></sub>
+      <br/><a href="https://codespaces.new/ahmedhany-cys/infrastructure-as-prompt?quickstart=1"><img src="https://img.shields.io/badge/Try%20it%20in%20your%20browser-GitHub%20Codespaces-7AA2F7?style=flat-square&logo=github&logoColor=white&labelColor=161B22" alt="Try it in your browser with GitHub Codespaces" /></a> <sub>no AWS account needed</sub>
     </td>
   </tr>
   <tr>
