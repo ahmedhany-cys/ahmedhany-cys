@@ -76,38 +76,56 @@ Most of my work lives on AWS, with Azure and Kubernetes alongside it. I write it
 
 <sub><code>featured project</code> &nbsp;<code>04 · respond</code></sub>
 
-### [CloudSentinel](https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response)
+### [KubeShield](https://github.com/ahmedhany-cys/kubeshield)
 
-**AWS threat detection, incident investigation and approval-controlled response.**
-A suspicious credential is enumerating resources, escalating privileges and reading S3 data. CloudSentinel takes the raw CloudTrail and GuardDuty signals and answers what happened, in what order, what was affected, how sure we are, and what to do next without breaking production.
+**Kubernetes runtime threat detection and approval-gated response.**
+Say a container drops a binary, reads its service account token and tries to reach a database in another namespace. KubeShield picks that up from Falco, Hubble and Kyverno, correlates it into one incident, and only isolates the pod after an analyst approves. Then it proves the isolation with real connections instead of trusting that a policy object exists.
 
-<a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response"><img src="./assets/featured/cloudsentinel-hero.jpg" width="100%" alt="CloudSentinel security overview dashboard in simulation mode with synthetic data" /></a>
+<a href="https://github.com/ahmedhany-cys/kubeshield"><img src="./assets/featured/kubeshield-hero.jpg" width="100%" alt="KubeShield security overview of a local lab cluster: open incidents, high and critical events, vulnerable images, policy violations and detection activity by source" /></a>
 
 <table>
   <tr>
-    <td width="33%" valign="top"><img src="./assets/featured/incident-details.jpg" width="100%" alt="Incident investigation with facts, indicators, hypotheses and blast radius" /><br/><sub><b>Investigate</b>: facts, indicators and hypotheses kept separate</sub></td>
-    <td width="33%" valign="top"><img src="./assets/featured/attack-timeline.jpg" width="100%" alt="Attack timeline with linked detections" /><br/><sub><b>Reconstruct</b>: ordered attack timeline with linked detections</sub></td>
-    <td width="33%" valign="top"><img src="./assets/featured/response-approval.jpg" width="100%" alt="Containment approval request awaiting a second responder" /><br/><sub><b>Respond</b>: dry run, second-person approval, rollback</sub></td>
+    <td width="33%" valign="top"><img src="./assets/featured/kubeshield-detect.jpg" width="100%" alt="Runtime threats page listing Falco, Hubble and Kyverno security events by severity" /><br/><sub><b>Detect</b>: Falco, Hubble and Kyverno events in one normalised feed</sub></td>
+    <td width="33%" valign="top"><img src="./assets/featured/kubeshield-investigate.jpg" width="100%" alt="Incident with eight correlated detections, an event timeline, ATT&amp;CK techniques and a response panel" /><br/><sub><b>Investigate</b>: detections correlated per pod, with timeline and ATT&amp;CK</sub></td>
+    <td width="33%" valign="top"><img src="./assets/featured/kubeshield-respond.jpg" width="100%" alt="Response history with approval mode and post-action verification checks for each action" /><br/><sub><b>Respond</b>: approval-gated actions, each verified after it runs</sub></td>
   </tr>
 </table>
 
 <p>
-  <img src="https://img.shields.io/badge/detection%20rules-17%20%C2%B7%20MITRE%20ATT%26CK-7AA2F7?style=flat-square&labelColor=161B22" alt="17 detection rules mapped to MITRE ATT&amp;CK" />
-  <img src="https://img.shields.io/badge/scenarios-5%20reproducible-7AA2F7?style=flat-square&labelColor=161B22" alt="5 reproducible scenarios" />
-  <img src="https://img.shields.io/badge/tests-157%20passing-7AA2F7?style=flat-square&labelColor=161B22" alt="157 passing tests" />
-  <img src="https://img.shields.io/badge/backend%20coverage-91%25-7AA2F7?style=flat-square&labelColor=161B22" alt="91% backend line coverage" />
-  <img src="https://img.shields.io/badge/audit%20log-hash--chained-7AA2F7?style=flat-square&labelColor=161B22" alt="hash-chained audit log" />
+  <img src="https://img.shields.io/badge/end--to--end%20checks-46%2F46%20passed-7AA2F7?style=flat-square&labelColor=161B22" alt="46 of 46 end-to-end checks passed" />
+  <img src="https://img.shields.io/badge/attack%20scenarios-9%20validated-7AA2F7?style=flat-square&labelColor=161B22" alt="9 attack scenarios validated" />
+  <img src="https://img.shields.io/badge/Falco%20rules-8%20custom-7AA2F7?style=flat-square&labelColor=161B22" alt="8 custom Falco rules" />
+  <img src="https://img.shields.io/badge/Kyverno%20guardrails-9-7AA2F7?style=flat-square&labelColor=161B22" alt="9 Kyverno guardrails" />
+  <img src="https://img.shields.io/badge/unit%20tests-62-7AA2F7?style=flat-square&labelColor=161B22" alt="62 unit tests" />
 </p>
-<sub><code>Python</code> · <code>FastAPI</code> · <code>React 19</code> · <code>TypeScript</code> · <code>Terraform</code> · <code>CloudTrail</code> · <code>GuardDuty</code> · <code>EventBridge</code> · <code>Lambda</code> · <code>Playwright</code></sub>
+<sub><code>Kubernetes</code> · <code>Falco</code> · <code>Cilium / Hubble</code> · <code>Kyverno</code> · <code>Trivy</code> · <code>FastAPI</code> · <code>PostgreSQL</code> · <code>TypeScript</code> · <code>Helm</code></sub>
 <br/><br/>
-<a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response#five-reproducible-scenarios">Scenarios</a> ·
-<a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response/blob/main/docs/detection-rules.md">Detection rules</a> ·
-<a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response/blob/main/docs/architecture.md">Architecture</a> ·
-<a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response/blob/main/docs/threat-model.md">Threat model</a> ·
-<a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response/blob/main/docs/testing.md">Test results</a> ·
-<a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response/tree/main/docs/sample-reports">Sample reports</a>
+<a href="https://github.com/ahmedhany-cys/kubeshield/blob/main/docs/validation/detection-validation-report.md">Validation report</a> ·
+<a href="https://github.com/ahmedhany-cys/kubeshield#problems-found-by-testing-and-fixed">What testing broke</a> ·
+<a href="https://github.com/ahmedhany-cys/kubeshield/blob/main/docs/detection-rules.md">Detection rules</a> ·
+<a href="https://github.com/ahmedhany-cys/kubeshield/blob/main/docs/architecture.md">Architecture</a> ·
+<a href="https://github.com/ahmedhany-cys/kubeshield/blob/main/docs/security-model.md">Security model</a> ·
+<a href="https://github.com/ahmedhany-cys/kubeshield/blob/main/docs/limitations.md">Limitations</a>
 <br/>
-<sub>Screenshots are from simulation mode with synthetic data, not real AWS detections or containment.</sub>
+<sub>A lab project: it runs on a local, loopback-only kind cluster and makes no production-readiness claims. Screenshots are from that lab.</sub>
+
+<br/><br/>
+
+<sub><code>spotlight</code> &nbsp;<code>live on AWS</code></sub>
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="https://github.com/ahmedhany-cys/aws-honeytrap#live-proof-of-concept-aws-2026-10-31"><img src="./assets/projects/honeytrap.jpg" width="100%" alt="AWS HoneyTrap dashboard filtered to live data from the proof of concept: 23 events, 11 sessions and 8 sources, with IPs pseudonymised" /></a>
+    </td>
+    <td width="50%" valign="top">
+      <b><a href="https://github.com/ahmedhany-cys/aws-honeytrap">AWS HoneyTrap</a></b>: a honeypot I put on the real internet<br/><br/>
+      On 2026-10-31 I deployed all <b>80 resources</b> with Terraform, left a hardened Cowrie decoy exposed for about <b>5 hours 20 minutes</b>, then tore it down and checked every resource type was gone. Cost: about <b>$0.10</b>.<br/><br/>
+      Real scanners arrived from 8 sources and every event travelled the whole pipeline. None logged in, so none of the 18 rules fired, and the README says exactly that.<br/><br/>
+      <sub><a href="https://github.com/ahmedhany-cys/aws-honeytrap#live-proof-of-concept-aws-2026-10-31">Live results</a> · <a href="https://github.com/ahmedhany-cys/aws-honeytrap/blob/main/docs/evidence/live-poc/teardown-verification.txt">Teardown check</a> · <a href="https://github.com/ahmedhany-cys/aws-honeytrap/blob/main/docs/detections.md">Detections</a> · <a href="https://github.com/ahmedhany-cys/aws-honeytrap/blob/main/docs/cost-management.md">Cost</a></sub>
+    </td>
+  </tr>
+</table>
 
 <div align="right"><a href="#top"><sub>back to top ↑</sub></a></div>
 
@@ -175,7 +193,7 @@ Ordered by the stage of the security lifecycle each one covers, from shipping co
     <td width="50%" valign="top">
       <sub><code>03 · detect</code> &nbsp;Who is knocking, and what do they try?</sub><br/>
       <a href="https://github.com/ahmedhany-cys/aws-honeytrap"><img src="./assets/projects/honeytrap.jpg" width="100%" alt="AWS HoneyTrap dashboard from the live proof of concept: 23 events from 8 sources, with source IPs pseudonymised" /></a>
-      <br/><a href="https://github.com/ahmedhany-cys/aws-honeytrap"><b>AWS HoneyTrap</b></a> <sub><code>new</code></sub>
+      <br/><a href="https://github.com/ahmedhany-cys/aws-honeytrap"><b>AWS HoneyTrap</b></a> <sub><code>new</code> <a href="#featured"><code>live on AWS</code></a></sub>
       <br/>A hardened Cowrie SSH/Telnet decoy feeding S3 → EventBridge → Lambda, with <b>18 detection rules</b> mapped to MITRE ATT&amp;CK. Deployed to AWS once for a live proof of concept, then torn down.
       <br/><sub><code>Python</code> · <code>Terraform</code> · <code>Cowrie</code> · <code>Lambda</code> · <code>Streamlit</code></sub>
     </td>
@@ -184,14 +202,14 @@ Ordered by the stage of the security lifecycle each one covers, from shipping co
     <td width="50%" valign="top">
       <sub><code>04 · respond</code> &nbsp;What happened, and what do we do now?</sub><br/>
       <a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response"><img src="./assets/projects/cloudsentinel.jpg" width="100%" alt="CloudSentinel security overview dashboard in simulation mode" /></a>
-      <br/><a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response"><b>CloudSentinel</b></a> <sub><a href="#featured"><code>featured</code></a></sub>
+      <br/><a href="https://github.com/ahmedhany-cys/cloudsentinel-aws-incident-response"><b>CloudSentinel</b></a>
       <br/>AWS threat detection and investigation: <b>17 rules mapped to MITRE ATT&amp;CK</b>, incident timelines, blast radius, and approval-gated containment with rollback.
       <br/><sub><code>Python</code> · <code>FastAPI</code> · <code>React</code> · <code>GuardDuty</code> · <code>Terraform</code></sub>
     </td>
     <td width="50%" valign="top">
       <sub><code>04 · respond</code> &nbsp;Something is running in a pod. Contain it?</sub><br/>
       <a href="https://github.com/ahmedhany-cys/kubeshield"><img src="./assets/projects/kubeshield.jpg" width="100%" alt="KubeShield security overview of a local lab cluster: open incidents, high and critical events, policy violations and detection activity" /></a>
-      <br/><a href="https://github.com/ahmedhany-cys/kubeshield"><b>KubeShield</b></a> <sub><code>new</code></sub>
+      <br/><a href="https://github.com/ahmedhany-cys/kubeshield"><b>KubeShield</b></a> <sub><code>new</code> <a href="#featured"><code>featured</code></a></sub>
       <br/>Kubernetes runtime detection and approval-gated response on Falco, Cilium/Hubble, Kyverno and Trivy. Containment is verified with real traffic: <b>46 of 46</b> end-to-end checks passed in the last full run.
       <br/><sub><code>Kubernetes</code> · <code>Falco</code> · <code>Cilium</code> · <code>Kyverno</code> · <code>FastAPI</code> · <code>TypeScript</code></sub>
     </td>
