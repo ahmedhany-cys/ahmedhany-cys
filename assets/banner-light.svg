@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="380" viewBox="0 0 1200 380" role="img" aria-labelledby="t d">
   <title id="t">Ahmed Hany, cloud security engineer</title>
-  <desc id="d">Detection and response engineering on AWS, Azure and Kubernetes. A network graph lights up one path, from a token through a role, a workload and a secret to the data it can reach.</desc>
+  <desc id="d">Detection and response engineering on AWS, Azure and Kubernetes. A cloud drawn in light holds a neural network: signals enter on the left, flow through the layers and light up one output.</desc>
   <defs>
     <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0B1D55"/>
       <stop offset="0.55" stop-color="#1741B0"/>
       <stop offset="1" stop-color="#0D2470"/>
     </linearGradient>
-    <radialGradient id="ga" cx="860" cy="170" r="470" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#6CB0FF" stop-opacity="0.50"/>
+    <radialGradient id="ga" cx="890" cy="180" r="470" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6CB0FF" stop-opacity="0.46"/>
       <stop offset="1" stop-color="#6CB0FF" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="gb" cx="1110" cy="206" r="230" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#FF8A3D" stop-opacity="0.42"/>
+    <radialGradient id="gb" cx="1094" cy="204" r="210" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF8A3D" stop-opacity="0.40"/>
       <stop offset="1" stop-color="#FF8A3D" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="gc" cx="90" cy="400" r="330" gradientUnits="userSpaceOnUse">
@@ -27,11 +27,20 @@
       <stop offset="0.72" stop-color="#fff"/>
     </linearGradient>
     <mask id="right"><rect width="1200" height="380" fill="url(#reveal)"/></mask>
-    <linearGradient id="heat" x1="668" y1="0" x2="1110" y2="0" gradientUnits="userSpaceOnUse">
+    <linearGradient id="heat" x1="704" y1="0" x2="1094" y2="0" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#4DA3FF"/>
-      <stop offset="0.55" stop-color="#8FA6F2"/>
-      <stop offset="0.8" stop-color="#FFB37A"/>
+      <stop offset="0.5" stop-color="#8FA6F2"/>
+      <stop offset="0.78" stop-color="#FFB37A"/>
       <stop offset="1" stop-color="#FF8A3D"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="620" y1="0" x2="1160" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7DB8FF"/>
+      <stop offset="0.6" stop-color="#DCE8FF"/>
+      <stop offset="1" stop-color="#FFB37A"/>
     </linearGradient>
     <linearGradient id="rim" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#4DA3FF" stop-opacity="0.9"/>
@@ -42,24 +51,27 @@
       <stop offset="0.35" stop-color="#FFFFFF"/>
       <stop offset="1" stop-color="#C4D8FF"/>
     </linearGradient>
-    <filter id="soft" x="-20%" y="-60%" width="140%" height="220%">
-      <feGaussianBlur stdDeviation="7"/>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6"/>
     </filter>
     <clipPath id="frame"><rect x="1" y="1" width="1198" height="378" rx="24"/></clipPath>
   </defs>
   <style>
     .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif; }
     .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; }
-    .flow { stroke-dasharray: 2 30; animation: flow 1.5s linear infinite; }
-    .tw { animation: tw 5s ease-in-out infinite; }
-    .tw:nth-child(3n) { animation-delay: -1.6s; }
-    .tw:nth-child(3n+1) { animation-delay: -3.3s; }
+    .flow { stroke-dasharray: 2 22; animation: flow 1.2s linear infinite; }
+    .fire { animation: fire 2.8s ease-in-out infinite; }
+    .f1 { animation-delay: 0.3s; } .f2 { animation-delay: 0.6s; } .f3 { animation-delay: 0.9s; }
+    .run { stroke-dasharray: 110 1287; animation: run 9s linear infinite; }
+    .up { stroke-dasharray: 3 10; animation: up 1.1s linear infinite; }
     .live { animation: live 2.4s ease-in-out infinite; }
-    @keyframes flow { to { stroke-dashoffset: -32; } }
-    @keyframes tw { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+    @keyframes flow { to { stroke-dashoffset: -24; } }
+    @keyframes fire { 0%, 100% { opacity: 0.10; } 30% { opacity: 0.42; } }
+    @keyframes run { to { stroke-dashoffset: -1397; } }
+    @keyframes up { to { stroke-dashoffset: -13; } }
     @keyframes live { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     @media (prefers-reduced-motion: reduce) {
-      .flow, .tw, .live { animation: none; }
+      .flow, .fire, .run, .up, .live { animation: none; }
       .motion { display: none; }
     }
   </style>
@@ -70,96 +82,187 @@
     <rect width="1200" height="380" fill="url(#ga)"/>
     <rect width="1200" height="380" fill="url(#gc)"/>
     <rect width="1200" height="380" fill="url(#gb)"/>
+
+    <!-- uplinks: telemetry streaming into the cloud -->
+    <g class="up" fill="none" stroke="#9CC7FF" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round">
+      <path d="M770 380 V323"/>
+      <path d="M886 380 V323"/>
+      <path d="M1002 380 V323"/>
+    </g>
   </g>
   <rect x="1" y="1" width="1198" height="378" rx="24" fill="none" stroke="url(#rim)" stroke-width="2"/>
 
-  <!-- graph: every edge is a permission -->
-  <g stroke="#B8C7E6" stroke-opacity="0.32" stroke-width="1.2">
-    <line x1="640" y1="112" x2="790" y2="152"/>
-    <line x1="722" y1="60" x2="790" y2="152"/>
-    <line x1="722" y1="60" x2="852" y2="62"/>
-    <line x1="852" y1="62" x2="790" y2="152"/>
-    <line x1="852" y1="62" x2="1004" y2="130"/>
-    <line x1="852" y1="62" x2="950" y2="34"/>
-    <line x1="950" y1="34" x2="1062" y2="56"/>
-    <line x1="668" y1="252" x2="640" y2="112"/>
-    <line x1="668" y1="252" x2="760" y2="322"/>
-    <line x1="760" y1="322" x2="882" y2="332"/>
-    <line x1="760" y1="322" x2="900" y2="238"/>
-    <line x1="882" y1="332" x2="900" y2="238"/>
-    <line x1="882" y1="332" x2="992" y2="302"/>
-    <line x1="992" y1="302" x2="900" y2="238"/>
-    <line x1="992" y1="302" x2="1092" y2="320"/>
-    <line x1="992" y1="302" x2="1110" y2="206"/>
-    <line x1="1092" y1="320" x2="1110" y2="206"/>
-    <line x1="1092" y1="320" x2="1168" y2="284"/>
-    <line x1="1110" y1="206" x2="1168" y2="284"/>
-    <line x1="1110" y1="206" x2="1152" y2="112"/>
-    <line x1="1152" y1="112" x2="1062" y2="56"/>
-    <line x1="1062" y1="56" x2="1004" y2="130"/>
-  </g>
-  <g fill="#0E2466" stroke="#B8C7E6" stroke-opacity="0.70" stroke-width="1.4">
-    <circle class="tw" cx="640" cy="112" r="4.5"/>
-    <circle class="tw" cx="722" cy="60" r="4.5"/>
-    <circle class="tw" cx="852" cy="62" r="4.5"/>
-    <circle class="tw" cx="760" cy="322" r="4.5"/>
-    <circle class="tw" cx="882" cy="332" r="4.5"/>
-    <circle class="tw" cx="992" cy="302" r="4.5"/>
-    <circle class="tw" cx="1092" cy="320" r="4.5"/>
-    <circle class="tw" cx="1152" cy="112" r="4.5"/>
-    <circle class="tw" cx="1062" cy="56" r="4.5"/>
-    <circle class="tw" cx="1168" cy="284" r="4.5"/>
-    <circle class="tw" cx="950" cy="34" r="4.5"/>
-  </g>
+  <!-- the cloud -->
+  <path d="M1068 318 H704 A80 80 0 1 1 718.5 159.3 A88 88 0 0 1 866.6 86.2 A102 102 0 0 1 1054.0 143.1 A88 88 0 1 1 1068.0 318.0 Z" fill="none" stroke="url(#edge)" stroke-width="8" opacity="0.55" filter="url(#soft)"/>
+  <path d="M1068 318 H704 A80 80 0 1 1 718.5 159.3 A88 88 0 0 1 866.6 86.2 A102 102 0 0 1 1054.0 143.1 A88 88 0 1 1 1068.0 318.0 Z" fill="url(#skin)" stroke="url(#edge)" stroke-width="2.5" stroke-linejoin="round"/>
+  <path class="run" d="M1068 318 H704 A80 80 0 1 1 718.5 159.3 A88 88 0 0 1 866.6 86.2 A102 102 0 0 1 1054.0 143.1 A88 88 0 1 1 1068.0 318.0 Z" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
 
-  <!-- the one path that reaches the data, cold to hot -->
-  <path d="M668 252 L790 152 L900 238 L1004 130 L1110 206" fill="none" stroke="url(#heat)" stroke-width="9" stroke-linejoin="round" stroke-linecap="round" opacity="0.75" filter="url(#soft)"/>
-  <path id="route" d="M668 252 L790 152 L900 238 L1004 130 L1110 206" fill="none" stroke="url(#heat)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-  <path class="flow" d="M668 252 L790 152 L900 238 L1004 130 L1110 206" fill="none" stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- the network: every layer fully connected to the next -->
+  <g stroke="#C4D3F0" stroke-opacity="0.24" stroke-width="1">
+    <line x1="704" y1="196" x2="806" y2="104"/>
+    <line x1="704" y1="196" x2="806" y2="150"/>
+    <line x1="704" y1="196" x2="806" y2="242"/>
+    <line x1="704" y1="196" x2="806" y2="288"/>
+    <line x1="704" y1="240" x2="806" y2="104"/>
+    <line x1="704" y1="240" x2="806" y2="150"/>
+    <line x1="704" y1="240" x2="806" y2="288"/>
+    <line x1="704" y1="284" x2="806" y2="104"/>
+    <line x1="704" y1="284" x2="806" y2="150"/>
+    <line x1="704" y1="284" x2="806" y2="196"/>
+    <line x1="704" y1="284" x2="806" y2="288"/>
+    <line x1="806" y1="104" x2="904" y2="96"/>
+    <line x1="806" y1="104" x2="904" y2="144"/>
+    <line x1="806" y1="104" x2="904" y2="192"/>
+    <line x1="806" y1="104" x2="904" y2="240"/>
+    <line x1="806" y1="104" x2="904" y2="288"/>
+    <line x1="806" y1="150" x2="904" y2="96"/>
+    <line x1="806" y1="150" x2="904" y2="144"/>
+    <line x1="806" y1="150" x2="904" y2="192"/>
+    <line x1="806" y1="150" x2="904" y2="240"/>
+    <line x1="806" y1="150" x2="904" y2="288"/>
+    <line x1="806" y1="196" x2="904" y2="96"/>
+    <line x1="806" y1="196" x2="904" y2="240"/>
+    <line x1="806" y1="196" x2="904" y2="288"/>
+    <line x1="806" y1="242" x2="904" y2="96"/>
+    <line x1="806" y1="242" x2="904" y2="144"/>
+    <line x1="806" y1="242" x2="904" y2="288"/>
+    <line x1="806" y1="288" x2="904" y2="96"/>
+    <line x1="806" y1="288" x2="904" y2="144"/>
+    <line x1="806" y1="288" x2="904" y2="192"/>
+    <line x1="806" y1="288" x2="904" y2="240"/>
+    <line x1="806" y1="288" x2="904" y2="288"/>
+    <line x1="904" y1="96" x2="1002" y2="118"/>
+    <line x1="904" y1="96" x2="1002" y2="170"/>
+    <line x1="904" y1="96" x2="1002" y2="222"/>
+    <line x1="904" y1="96" x2="1002" y2="274"/>
+    <line x1="904" y1="144" x2="1002" y2="118"/>
+    <line x1="904" y1="144" x2="1002" y2="222"/>
+    <line x1="904" y1="144" x2="1002" y2="274"/>
+    <line x1="904" y1="192" x2="1002" y2="118"/>
+    <line x1="904" y1="192" x2="1002" y2="274"/>
+    <line x1="904" y1="240" x2="1002" y2="118"/>
+    <line x1="904" y1="240" x2="1002" y2="170"/>
+    <line x1="904" y1="240" x2="1002" y2="274"/>
+    <line x1="904" y1="288" x2="1002" y2="118"/>
+    <line x1="904" y1="288" x2="1002" y2="170"/>
+    <line x1="904" y1="288" x2="1002" y2="222"/>
+    <line x1="904" y1="288" x2="1002" y2="274"/>
+    <line x1="1002" y1="118" x2="1094" y2="204"/>
+    <line x1="1002" y1="118" x2="1094" y2="262"/>
+    <line x1="1002" y1="170" x2="1094" y2="262"/>
+    <line x1="1002" y1="222" x2="1094" y2="262"/>
+    <line x1="1002" y1="274" x2="1094" y2="204"/>
+    <line x1="1002" y1="274" x2="1094" y2="262"/>
+  </g>
+  <g stroke="url(#heat)" stroke-width="7" stroke-linecap="round" opacity="0.5" filter="url(#soft)">
+    <line x1="704" y1="196" x2="806" y2="196"/>
+    <line x1="704" y1="240" x2="806" y2="196"/>
+    <line x1="704" y1="240" x2="806" y2="242"/>
+    <line x1="704" y1="284" x2="806" y2="242"/>
+    <line x1="806" y1="196" x2="904" y2="144"/>
+    <line x1="806" y1="196" x2="904" y2="192"/>
+    <line x1="806" y1="242" x2="904" y2="192"/>
+    <line x1="806" y1="242" x2="904" y2="240"/>
+    <line x1="904" y1="144" x2="1002" y2="170"/>
+    <line x1="904" y1="192" x2="1002" y2="170"/>
+    <line x1="904" y1="192" x2="1002" y2="222"/>
+    <line x1="904" y1="240" x2="1002" y2="222"/>
+    <line x1="1002" y1="170" x2="1094" y2="204"/>
+    <line x1="1002" y1="222" x2="1094" y2="204"/>
+  </g>
+  <g stroke="url(#heat)" stroke-width="2.4" stroke-linecap="round">
+    <line x1="704" y1="196" x2="806" y2="196"/>
+    <line x1="704" y1="240" x2="806" y2="196"/>
+    <line x1="704" y1="240" x2="806" y2="242"/>
+    <line x1="704" y1="284" x2="806" y2="242"/>
+    <line x1="806" y1="196" x2="904" y2="144"/>
+    <line x1="806" y1="196" x2="904" y2="192"/>
+    <line x1="806" y1="242" x2="904" y2="192"/>
+    <line x1="806" y1="242" x2="904" y2="240"/>
+    <line x1="904" y1="144" x2="1002" y2="170"/>
+    <line x1="904" y1="192" x2="1002" y2="170"/>
+    <line x1="904" y1="192" x2="1002" y2="222"/>
+    <line x1="904" y1="240" x2="1002" y2="222"/>
+    <line x1="1002" y1="170" x2="1094" y2="204"/>
+    <line x1="1002" y1="222" x2="1094" y2="204"/>
+  </g>
+  <g stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="2.6" stroke-linecap="round">
+    <line class="flow f0" x1="704" y1="196" x2="806" y2="196"/>
+    <line class="flow f0" x1="704" y1="240" x2="806" y2="196"/>
+    <line class="flow f0" x1="704" y1="240" x2="806" y2="242"/>
+    <line class="flow f0" x1="704" y1="284" x2="806" y2="242"/>
+    <line class="flow f1" x1="806" y1="196" x2="904" y2="144"/>
+    <line class="flow f1" x1="806" y1="196" x2="904" y2="192"/>
+    <line class="flow f1" x1="806" y1="242" x2="904" y2="192"/>
+    <line class="flow f1" x1="806" y1="242" x2="904" y2="240"/>
+    <line class="flow f2" x1="904" y1="144" x2="1002" y2="170"/>
+    <line class="flow f2" x1="904" y1="192" x2="1002" y2="170"/>
+    <line class="flow f2" x1="904" y1="192" x2="1002" y2="222"/>
+    <line class="flow f2" x1="904" y1="240" x2="1002" y2="222"/>
+    <line class="flow f3" x1="1002" y1="170" x2="1094" y2="204"/>
+    <line class="flow f3" x1="1002" y1="222" x2="1094" y2="204"/>
+  </g>
+  <g fill="#0E2466" stroke="#C4D3F0" stroke-opacity="0.72" stroke-width="1.5">
+    <circle cx="806" cy="104" r="6"/>
+    <circle cx="806" cy="150" r="6"/>
+    <circle cx="806" cy="288" r="6"/>
+    <circle cx="904" cy="96" r="6"/>
+    <circle cx="904" cy="288" r="6"/>
+    <circle cx="1002" cy="118" r="6"/>
+    <circle cx="1002" cy="274" r="6"/>
+    <circle cx="1094" cy="262" r="6"/>
+  </g>
   <g>
-    <circle cx="668" cy="252" r="22" fill="#4DA3FF" opacity="0.16"/>
-    <circle cx="668" cy="252" r="12" fill="#0E2466" stroke="#4DA3FF" stroke-width="2.5"/>
-    <circle cx="668" cy="252" r="4.5" fill="#4DA3FF"/>
-    <circle cx="790" cy="152" r="22" fill="#63A2FB" opacity="0.16"/>
-    <circle cx="790" cy="152" r="12" fill="#0E2466" stroke="#63A2FB" stroke-width="2.5"/>
-    <circle cx="790" cy="152" r="4.5" fill="#63A2FB"/>
-    <circle cx="900" cy="238" r="22" fill="#8FA6F2" opacity="0.16"/>
-    <circle cx="900" cy="238" r="12" fill="#0E2466" stroke="#8FA6F2" stroke-width="2.5"/>
-    <circle cx="900" cy="238" r="4.5" fill="#8FA6F2"/>
-    <circle cx="1004" cy="130" r="22" fill="#FFB37A" opacity="0.16"/>
-    <circle cx="1004" cy="130" r="12" fill="#0E2466" stroke="#FFB37A" stroke-width="2.5"/>
-    <circle cx="1004" cy="130" r="4.5" fill="#FFB37A"/>
+    <circle class="fire f0" cx="704" cy="196" r="19" fill="#4DA3FF" opacity="0.16"/>
+    <circle cx="704" cy="196" r="9.5" fill="#0E2466" stroke="#4DA3FF" stroke-width="2.5"/>
+    <circle cx="704" cy="196" r="3.6" fill="#4DA3FF"/>
+    <circle class="fire f0" cx="704" cy="240" r="19" fill="#4DA3FF" opacity="0.16"/>
+    <circle cx="704" cy="240" r="9.5" fill="#0E2466" stroke="#4DA3FF" stroke-width="2.5"/>
+    <circle cx="704" cy="240" r="3.6" fill="#4DA3FF"/>
+    <circle class="fire f0" cx="704" cy="284" r="19" fill="#4DA3FF" opacity="0.16"/>
+    <circle cx="704" cy="284" r="9.5" fill="#0E2466" stroke="#4DA3FF" stroke-width="2.5"/>
+    <circle cx="704" cy="284" r="3.6" fill="#4DA3FF"/>
+    <circle class="fire f1" cx="806" cy="196" r="19" fill="#63A2FB" opacity="0.16"/>
+    <circle cx="806" cy="196" r="9.5" fill="#0E2466" stroke="#63A2FB" stroke-width="2.5"/>
+    <circle cx="806" cy="196" r="3.6" fill="#63A2FB"/>
+    <circle class="fire f1" cx="806" cy="242" r="19" fill="#63A2FB" opacity="0.16"/>
+    <circle cx="806" cy="242" r="9.5" fill="#0E2466" stroke="#63A2FB" stroke-width="2.5"/>
+    <circle cx="806" cy="242" r="3.6" fill="#63A2FB"/>
+    <circle class="fire f2" cx="904" cy="144" r="19" fill="#8FA6F2" opacity="0.16"/>
+    <circle cx="904" cy="144" r="9.5" fill="#0E2466" stroke="#8FA6F2" stroke-width="2.5"/>
+    <circle cx="904" cy="144" r="3.6" fill="#8FA6F2"/>
+    <circle class="fire f2" cx="904" cy="192" r="19" fill="#8FA6F2" opacity="0.16"/>
+    <circle cx="904" cy="192" r="9.5" fill="#0E2466" stroke="#8FA6F2" stroke-width="2.5"/>
+    <circle cx="904" cy="192" r="3.6" fill="#8FA6F2"/>
+    <circle class="fire f2" cx="904" cy="240" r="19" fill="#8FA6F2" opacity="0.16"/>
+    <circle cx="904" cy="240" r="9.5" fill="#0E2466" stroke="#8FA6F2" stroke-width="2.5"/>
+    <circle cx="904" cy="240" r="3.6" fill="#8FA6F2"/>
+    <circle class="fire f3" cx="1002" cy="170" r="19" fill="#FFB37A" opacity="0.16"/>
+    <circle cx="1002" cy="170" r="9.5" fill="#0E2466" stroke="#FFB37A" stroke-width="2.5"/>
+    <circle cx="1002" cy="170" r="3.6" fill="#FFB37A"/>
+    <circle class="fire f3" cx="1002" cy="222" r="19" fill="#FFB37A" opacity="0.16"/>
+    <circle cx="1002" cy="222" r="9.5" fill="#0E2466" stroke="#FFB37A" stroke-width="2.5"/>
+    <circle cx="1002" cy="222" r="3.6" fill="#FFB37A"/>
   </g>
 
-  <!-- target -->
-  <circle cx="1110" cy="206" r="36" fill="#FF8A3D" opacity="0.20"/>
-  <circle class="motion" cx="1110" cy="206" r="14" fill="none" stroke="#FF8A3D" stroke-width="2" opacity="0">
-    <animate attributeName="r" dur="2.6s" repeatCount="indefinite" values="14;46"/>
-    <animate attributeName="opacity" dur="2.6s" repeatCount="indefinite" values="0.9;0"/>
+  <!-- the output that fires -->
+  <circle cx="1094" cy="204" r="34" fill="#FF8A3D" opacity="0.22"/>
+  <circle class="motion" cx="1094" cy="204" r="13" fill="none" stroke="#FF8A3D" stroke-width="2" opacity="0">
+    <animate attributeName="r" dur="2.8s" repeatCount="indefinite" values="13;13;44" keyTimes="0;0.45;1"/>
+    <animate attributeName="opacity" dur="2.8s" repeatCount="indefinite" values="0;0.9;0" keyTimes="0;0.45;1"/>
   </circle>
-  <circle class="motion" cx="1110" cy="206" r="14" fill="none" stroke="#FFB37A" stroke-width="2" opacity="0">
-    <animate attributeName="r" dur="2.6s" begin="1.3s" repeatCount="indefinite" values="14;46"/>
-    <animate attributeName="opacity" dur="2.6s" begin="1.3s" repeatCount="indefinite" values="0.9;0"/>
-  </circle>
-  <circle cx="1110" cy="206" r="15" fill="#0E2466" stroke="#FF8A3D" stroke-width="3"/>
-  <circle cx="1110" cy="206" r="6" fill="#FF8A3D"/>
+  <circle cx="1094" cy="204" r="14" fill="#0E2466" stroke="#FF8A3D" stroke-width="3"/>
+  <circle cx="1094" cy="204" r="5.5" fill="#FF8A3D"/>
 
-  <!-- comet -->
+  <!-- one signal to follow -->
+  <path id="signal" d="M704 240 L806 196 L904 192 L1002 170 L1094 204" fill="none"/>
   <g class="motion" opacity="0">
-    <circle r="11" fill="#FFFFFF" opacity="0.25"/>
-    <circle r="5.5" fill="#FFFFFF"/>
-    <animateMotion dur="3.6s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;1" keyTimes="0;0.8;1">
-      <mpath href="#route"/>
+    <circle r="10" fill="#FFFFFF" opacity="0.25"/>
+    <circle r="5" fill="#FFFFFF"/>
+    <animateMotion dur="2.8s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;1" keyTimes="0;0.45;1">
+      <mpath href="#signal"/>
     </animateMotion>
-    <animate attributeName="opacity" dur="3.6s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.05;0.74;0.8;1"/>
-  </g>
-
-  <g class="mono" font-size="13.5" text-anchor="middle" fill="#C9D8FF">
-    <text x="668" y="290">token</text>
-    <text x="790" y="124">role</text>
-    <text x="900" y="276">workload</text>
-    <text x="1004" y="102">secret</text>
-    <text x="1110" y="172" fill="#FFB37A" font-weight="700" font-size="15">data</text>
+    <animate attributeName="opacity" dur="2.8s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.04;0.41;0.45;1"/>
   </g>
 
   <!-- identity -->

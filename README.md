@@ -8,8 +8,8 @@
     assets/banner-dark.svg, assets/banner-light.svg   GitHub swaps them by theme through <picture>
     assets/work/*.svg                                  one 16:9 cover per project, in a window frame
     scripts/build_assets.py                            rebuilds all of the above (screenshots live in assets/src/)
-  Banner: one composition in two colourings, ink for dark mode and royal blue for light mode. Its path runs
-  from blue to orange, and orange means risk everywhere on this page.
+  Banner: a neural network inside a cloud, in two colourings (ink for dark mode, royal blue for light mode).
+  Signals run from blue to orange, and orange means a finding or a risk everywhere on this page.
   Pull request status badges are live from shields.io, so add a row and never edit a status by hand.
 -->
 
