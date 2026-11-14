@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="719" viewBox="0 0 1200 719" role="img" aria-labelledby="t">
+  <title id="t">TrustMint scan of the synthetic Acme estate: 20 federation trusts ranked from PUBLIC to NONE by who can mint a token each identity accepts</title>
+  <defs>
+    <clipPath id="win"><rect x="1" y="1" width="1198" height="717" rx="15"/></clipPath>
+  </defs>
+  <style>.mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; }</style>
+  <g clip-path="url(#win)">
+    <rect width="1200" height="719" fill="#0D1117"/>
+    <g class="mono" font-size="23" fill="#C9D1D9" xml:space="preserve">
+      <text x="48" y="104"><tspan x="48" fill="#7AA2F7">$ trustmint scan -s examples/acme/snapshot.json</tspan></text>
+      <text x="48" y="147"><tspan x="48" fill="#C9D1D9">TrustMint 0.1.0: 20 federation trusts</tspan></text>
+      <text x="48" y="190"><tspan x="48" fill="#C9D1D9">Findings: </tspan><tspan fill="#FF9E64">11 critical</tspan><tspan fill="#C9D1D9">, 7 high, 3 medium, 1 low, 4 info</tspan></text>
+      <text x="48" y="255"><tspan x="48" fill="#8B949E">WHO CAN MINT A TOKEN EACH IDENTITY ACCEPTS</tspan></text>
+      <text x="48" y="298"><tspan x="48" fill="#FF9E64" font-weight="700">PUBLIC</tspan><tspan x="206" fill="#C9D1D9">role/gh-release-main</tspan><tspan x="640" fill="#8B949E">aws</tspan><tspan x="740" fill="#6E7681">&lt;-</tspan><tspan x="790" fill="#C9D1D9">github</tspan><tspan x="960" fill="#8B949E">write</tspan></text>
+      <text x="48" y="341"><tspan x="48" fill="#FF9E64" font-weight="700">PUBLIC</tspan><tspan x="206" fill="#C9D1D9">projects/acme-artifacts</tspan><tspan x="640" fill="#8B949E">gcp</tspan><tspan x="740" fill="#6E7681">&lt;-</tspan><tspan x="790" fill="#C9D1D9">gitlab</tspan><tspan x="960" fill="#8B949E">write</tspan></text>
+      <text x="48" y="384"><tspan x="48" fill="#E0AF68" font-weight="700">TENANT</tspan><tspan x="206" fill="#C9D1D9">role/gh-org-admin</tspan><tspan x="640" fill="#8B949E">aws</tspan><tspan x="740" fill="#6E7681">&lt;-</tspan><tspan x="790" fill="#C9D1D9">github</tspan><tspan x="960" fill="#8B949E">admin</tspan></text>
+      <text x="48" y="427"><tspan x="48" fill="#E0AF68" font-weight="700">TENANT</tspan><tspan x="206" fill="#C9D1D9">platform-automation</tspan><tspan x="640" fill="#8B949E">azure</tspan><tspan x="740" fill="#6E7681">&lt;-</tspan><tspan x="790" fill="#C9D1D9">github</tspan><tspan x="960" fill="#8B949E">admin</tspan></text>
+      <text x="48" y="470"><tspan x="48" fill="#7AA2F7" font-weight="700">PROJECT</tspan><tspan x="206" fill="#C9D1D9">role/tfc-prod-network</tspan><tspan x="640" fill="#8B949E">aws</tspan><tspan x="740" fill="#6E7681">&lt;-</tspan><tspan x="790" fill="#C9D1D9">terraform</tspan><tspan x="960" fill="#8B949E">admin</tspan></text>
+      <text x="48" y="513"><tspan x="48" fill="#9ECE6A" font-weight="700">PROTECTED</tspan><tspan x="206" fill="#C9D1D9">role/gh-payments-immutable</tspan><tspan x="640" fill="#8B949E">aws</tspan><tspan x="740" fill="#6E7681">&lt;-</tspan><tspan x="790" fill="#C9D1D9">github</tspan><tspan x="960" fill="#8B949E">write</tspan></text>
+      <text x="48" y="556"><tspan x="48" fill="#6E7681" font-weight="700">NONE</tspan><tspan x="206" fill="#C9D1D9">role/gh-web-broken</tspan><tspan x="640" fill="#8B949E">aws</tspan><tspan x="740" fill="#6E7681">&lt;-</tspan><tspan x="790" fill="#C9D1D9">github</tspan><tspan x="960" fill="#8B949E">write</tspan></text>
+      <text x="48" y="621"><tspan x="48" fill="#6E7681">Synthetic Acme estate from examples/acme. Every ID is made up.</tspan></text>
+    </g>
+    <rect width="1200" height="44" fill="#161B22"/>
+    <line x1="0" y1="44" x2="1200" y2="44" stroke="#30363D" stroke-width="2"/>
+    <circle cx="30" cy="22" r="6.5" fill="#3D444D"/>
+    <circle cx="52" cy="22" r="6.5" fill="#3D444D"/>
+    <circle cx="74" cy="22" r="6.5" fill="#3D444D"/>
+    <text x="600" y="27" class="mono" font-size="15" fill="#9198A1" text-anchor="middle">trustmint</text>
+  </g>
+  <rect x="1" y="1" width="1198" height="717" rx="15" fill="none" stroke="#30363D" stroke-width="2"/>
+</svg>
