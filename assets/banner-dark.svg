@@ -1,91 +1,183 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" role="img" aria-labelledby="t d">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="380" viewBox="0 0 1200 380" role="img" aria-labelledby="t d">
   <title id="t">Ahmed Hany, cloud security engineer</title>
-  <desc id="d">Detection and response on AWS, Azure and Kubernetes. A graph traces one path from a token through a role and a workload to the data it can reach.</desc>
+  <desc id="d">Detection and response engineering on AWS, Azure and Kubernetes. A network graph lights up one path, from a token through a role, a workload and a secret to the data it can reach.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#10151D"/>
-      <stop offset="1" stop-color="#0B0F15"/>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070B16"/>
+      <stop offset="0.55" stop-color="#0A1330"/>
+      <stop offset="1" stop-color="#0A0E1C"/>
     </linearGradient>
-    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
-      <circle cx="1.2" cy="1.2" r="1.2" fill="#222A35"/>
+    <radialGradient id="ga" cx="860" cy="170" r="470" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2F6BFF" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#2F6BFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gb" cx="1110" cy="206" r="230" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF7A2F" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#FF7A2F" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gc" cx="90" cy="400" r="330" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1FB6FF" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#1FB6FF" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#FFFFFF" stroke-opacity="0.05" stroke-width="1"/>
     </pattern>
     <linearGradient id="reveal" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0.42" stop-color="#000"/>
-      <stop offset="0.78" stop-color="#fff"/>
+      <stop offset="0.30" stop-color="#000"/>
+      <stop offset="0.72" stop-color="#fff"/>
     </linearGradient>
-    <mask id="right"><rect width="1200" height="340" fill="url(#reveal)"/></mask>
-    <radialGradient id="glow" cx="1082" cy="122" r="300" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#7AA2F7" stop-opacity="0.16"/>
-      <stop offset="1" stop-color="#7AA2F7" stop-opacity="0"/>
-    </radialGradient>
-    <clipPath id="frame"><rect x="1" y="1" width="1198" height="338" rx="20"/></clipPath>
+    <mask id="right"><rect width="1200" height="380" fill="url(#reveal)"/></mask>
+    <linearGradient id="heat" x1="668" y1="0" x2="1110" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4DA3FF"/>
+      <stop offset="0.55" stop-color="#8FA6F2"/>
+      <stop offset="0.8" stop-color="#FFB37A"/>
+      <stop offset="1" stop-color="#FF8A3D"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4DA3FF" stop-opacity="0.9"/>
+      <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#FF8A3D" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="name" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0.35" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#C4D8FF"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-60%" width="140%" height="220%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <clipPath id="frame"><rect x="1" y="1" width="1198" height="378" rx="24"/></clipPath>
   </defs>
   <style>
     .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif; }
     .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; }
-    @media (prefers-reduced-motion: reduce) { .motion { display: none; } }
+    .flow { stroke-dasharray: 2 30; animation: flow 1.5s linear infinite; }
+    .tw { animation: tw 5s ease-in-out infinite; }
+    .tw:nth-child(3n) { animation-delay: -1.6s; }
+    .tw:nth-child(3n+1) { animation-delay: -3.3s; }
+    .live { animation: live 2.4s ease-in-out infinite; }
+    @keyframes flow { to { stroke-dashoffset: -32; } }
+    @keyframes tw { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+    @keyframes live { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    @media (prefers-reduced-motion: reduce) {
+      .flow, .tw, .live { animation: none; }
+      .motion { display: none; }
+    }
   </style>
 
   <g clip-path="url(#frame)">
-    <rect width="1200" height="340" fill="url(#bg)"/>
-    <rect width="1200" height="340" fill="url(#dots)" mask="url(#right)"/>
-    <rect width="1200" height="340" fill="url(#glow)"/>
+    <rect width="1200" height="380" fill="url(#base)"/>
+    <rect width="1200" height="380" fill="url(#grid)" mask="url(#right)"/>
+    <rect width="1200" height="380" fill="url(#ga)"/>
+    <rect width="1200" height="380" fill="url(#gc)"/>
+    <rect width="1200" height="380" fill="url(#gb)"/>
   </g>
-  <rect x="1" y="1" width="1198" height="338" rx="20" fill="none" stroke="#30363D" stroke-width="2"/>
+  <rect x="1" y="1" width="1198" height="378" rx="24" fill="none" stroke="url(#rim)" stroke-width="2"/>
 
-  <!-- identity -->
-  <rect x="64" y="85" width="28" height="2" rx="1" fill="#7AA2F7"/>
-  <text x="106" y="91" class="mono" font-size="14" font-weight="600" letter-spacing="2.6" fill="#7AA2F7">CLOUD SECURITY ENGINEER</text>
-  <text x="61" y="168" class="sans" font-size="70" font-weight="700" letter-spacing="-2.2" fill="#F0F6FC">Ahmed Hany</text>
-  <text x="64" y="214" class="sans" font-size="22" fill="#9198A1">Detection and response on AWS, Azure and Kubernetes</text>
-  <text x="64" y="272" class="mono" font-size="14" fill="#6E7681">evidence first, never a guess</text>
+  <!-- graph: every edge is a permission -->
+  <g stroke="#B8C7E6" stroke-opacity="0.24" stroke-width="1.2">
+    <line x1="640" y1="112" x2="790" y2="152"/>
+    <line x1="722" y1="60" x2="790" y2="152"/>
+    <line x1="722" y1="60" x2="852" y2="62"/>
+    <line x1="852" y1="62" x2="790" y2="152"/>
+    <line x1="852" y1="62" x2="1004" y2="130"/>
+    <line x1="852" y1="62" x2="950" y2="34"/>
+    <line x1="950" y1="34" x2="1062" y2="56"/>
+    <line x1="668" y1="252" x2="640" y2="112"/>
+    <line x1="668" y1="252" x2="760" y2="322"/>
+    <line x1="760" y1="322" x2="882" y2="332"/>
+    <line x1="760" y1="322" x2="900" y2="238"/>
+    <line x1="882" y1="332" x2="900" y2="238"/>
+    <line x1="882" y1="332" x2="992" y2="302"/>
+    <line x1="992" y1="302" x2="900" y2="238"/>
+    <line x1="992" y1="302" x2="1092" y2="320"/>
+    <line x1="992" y1="302" x2="1110" y2="206"/>
+    <line x1="1092" y1="320" x2="1110" y2="206"/>
+    <line x1="1092" y1="320" x2="1168" y2="284"/>
+    <line x1="1110" y1="206" x2="1168" y2="284"/>
+    <line x1="1110" y1="206" x2="1152" y2="112"/>
+    <line x1="1152" y1="112" x2="1062" y2="56"/>
+    <line x1="1062" y1="56" x2="1004" y2="130"/>
+  </g>
+  <g fill="#0A1022" stroke="#B8C7E6" stroke-opacity="0.60" stroke-width="1.4">
+    <circle class="tw" cx="640" cy="112" r="4.5"/>
+    <circle class="tw" cx="722" cy="60" r="4.5"/>
+    <circle class="tw" cx="852" cy="62" r="4.5"/>
+    <circle class="tw" cx="760" cy="322" r="4.5"/>
+    <circle class="tw" cx="882" cy="332" r="4.5"/>
+    <circle class="tw" cx="992" cy="302" r="4.5"/>
+    <circle class="tw" cx="1092" cy="320" r="4.5"/>
+    <circle class="tw" cx="1152" cy="112" r="4.5"/>
+    <circle class="tw" cx="1062" cy="56" r="4.5"/>
+    <circle class="tw" cx="1168" cy="284" r="4.5"/>
+    <circle class="tw" cx="950" cy="34" r="4.5"/>
+  </g>
 
-  <!-- graph: every edge is a permission; one path reaches the data -->
-  <g stroke="#2A313C" stroke-width="1.5">
-    <line x1="716" y1="70" x2="836" y2="122"/>
-    <line x1="716" y1="70" x2="956" y2="70"/>
-    <line x1="716" y1="204" x2="836" y2="270"/>
-    <line x1="836" y1="270" x2="956" y2="204"/>
-    <line x1="836" y1="122" x2="956" y2="70"/>
-    <line x1="956" y1="70" x2="1082" y2="122"/>
-    <line x1="956" y1="204" x2="1082" y2="270"/>
-    <line x1="836" y1="270" x2="1082" y2="270"/>
-    <line x1="1082" y1="122" x2="1146" y2="204"/>
-    <line x1="1082" y1="270" x2="1146" y2="204"/>
-  </g>
-  <g fill="#0D1117" stroke="#3D444D" stroke-width="1.5">
-    <circle cx="716" cy="70" r="6"/>
-    <circle cx="836" cy="270" r="6"/>
-    <circle cx="956" cy="70" r="6"/>
-    <circle cx="1082" cy="270" r="6"/>
-    <circle cx="1146" cy="204" r="6"/>
-  </g>
-  <path id="route" d="M716 204 L836 122 L956 204 L1082 122" fill="none" stroke="#7AA2F7" stroke-width="2" stroke-linejoin="round" stroke-opacity="0.75"/>
+  <!-- the one path that reaches the data, cold to hot -->
+  <path d="M668 252 L790 152 L900 238 L1004 130 L1110 206" fill="none" stroke="url(#heat)" stroke-width="9" stroke-linejoin="round" stroke-linecap="round" opacity="0.75" filter="url(#soft)"/>
+  <path id="route" d="M668 252 L790 152 L900 238 L1004 130 L1110 206" fill="none" stroke="url(#heat)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <path class="flow" d="M668 252 L790 152 L900 238 L1004 130 L1110 206" fill="none" stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
   <g>
-    <circle cx="716" cy="204" r="10" fill="#0D1117" stroke="#7AA2F7" stroke-width="2"/>
-    <circle cx="716" cy="204" r="3.5" fill="#7AA2F7"/>
-    <circle cx="836" cy="122" r="10" fill="#0D1117" stroke="#7AA2F7" stroke-width="2"/>
-    <circle cx="836" cy="122" r="3.5" fill="#7AA2F7"/>
-    <circle cx="956" cy="204" r="10" fill="#0D1117" stroke="#7AA2F7" stroke-width="2"/>
-    <circle cx="956" cy="204" r="3.5" fill="#7AA2F7"/>
+    <circle cx="668" cy="252" r="22" fill="#4DA3FF" opacity="0.16"/>
+    <circle cx="668" cy="252" r="12" fill="#0A1022" stroke="#4DA3FF" stroke-width="2.5"/>
+    <circle cx="668" cy="252" r="4.5" fill="#4DA3FF"/>
+    <circle cx="790" cy="152" r="22" fill="#63A2FB" opacity="0.16"/>
+    <circle cx="790" cy="152" r="12" fill="#0A1022" stroke="#63A2FB" stroke-width="2.5"/>
+    <circle cx="790" cy="152" r="4.5" fill="#63A2FB"/>
+    <circle cx="900" cy="238" r="22" fill="#8FA6F2" opacity="0.16"/>
+    <circle cx="900" cy="238" r="12" fill="#0A1022" stroke="#8FA6F2" stroke-width="2.5"/>
+    <circle cx="900" cy="238" r="4.5" fill="#8FA6F2"/>
+    <circle cx="1004" cy="130" r="22" fill="#FFB37A" opacity="0.16"/>
+    <circle cx="1004" cy="130" r="12" fill="#0A1022" stroke="#FFB37A" stroke-width="2.5"/>
+    <circle cx="1004" cy="130" r="4.5" fill="#FFB37A"/>
   </g>
-  <circle class="motion" cx="1082" cy="122" r="12" fill="none" stroke="#FF9E64" stroke-width="2" opacity="0">
-    <animate attributeName="r" dur="4.2s" repeatCount="indefinite" values="12;12;30" keyTimes="0;0.7;1"/>
-    <animate attributeName="opacity" dur="4.2s" repeatCount="indefinite" values="0;0.85;0" keyTimes="0;0.7;1"/>
+
+  <!-- target -->
+  <circle cx="1110" cy="206" r="36" fill="#FF8A3D" opacity="0.20"/>
+  <circle class="motion" cx="1110" cy="206" r="14" fill="none" stroke="#FF8A3D" stroke-width="2" opacity="0">
+    <animate attributeName="r" dur="2.6s" repeatCount="indefinite" values="14;46"/>
+    <animate attributeName="opacity" dur="2.6s" repeatCount="indefinite" values="0.9;0"/>
   </circle>
-  <circle cx="1082" cy="122" r="11" fill="#0D1117" stroke="#FF9E64" stroke-width="2"/>
-  <circle cx="1082" cy="122" r="4" fill="#FF9E64"/>
-  <circle class="motion" r="5" fill="#7AA2F7" opacity="0">
-    <animateMotion dur="4.2s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;1" keyTimes="0;0.7;1">
+  <circle class="motion" cx="1110" cy="206" r="14" fill="none" stroke="#FFB37A" stroke-width="2" opacity="0">
+    <animate attributeName="r" dur="2.6s" begin="1.3s" repeatCount="indefinite" values="14;46"/>
+    <animate attributeName="opacity" dur="2.6s" begin="1.3s" repeatCount="indefinite" values="0.9;0"/>
+  </circle>
+  <circle cx="1110" cy="206" r="15" fill="#0A1022" stroke="#FF8A3D" stroke-width="3"/>
+  <circle cx="1110" cy="206" r="6" fill="#FF8A3D"/>
+
+  <!-- comet -->
+  <g class="motion" opacity="0">
+    <circle r="11" fill="#FFFFFF" opacity="0.25"/>
+    <circle r="5.5" fill="#FFFFFF"/>
+    <animateMotion dur="3.6s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;1" keyTimes="0;0.8;1">
       <mpath href="#route"/>
     </animateMotion>
-    <animate attributeName="opacity" dur="4.2s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.06;0.66;0.7;1"/>
-  </circle>
-
-  <g class="mono" font-size="13" text-anchor="middle" fill="#9198A1">
-    <text x="716" y="236">token</text>
-    <text x="836" y="100">role</text>
-    <text x="956" y="236">workload</text>
-    <text x="1082" y="98" fill="#FF9E64" font-weight="600">data</text>
+    <animate attributeName="opacity" dur="3.6s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.05;0.74;0.8;1"/>
   </g>
+
+  <g class="mono" font-size="13.5" text-anchor="middle" fill="#AAB6D3">
+    <text x="668" y="290">token</text>
+    <text x="790" y="124">role</text>
+    <text x="900" y="276">workload</text>
+    <text x="1004" y="102">secret</text>
+    <text x="1110" y="172" fill="#FFB37A" font-weight="700" font-size="15">data</text>
+  </g>
+
+  <!-- identity -->
+  <rect x="64" y="56" width="288" height="34" rx="17" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.20"/>
+  <circle class="live" cx="84" cy="73" r="4.5" fill="#4ADE80"/>
+  <text x="100" y="78" class="mono" font-size="13" font-weight="600" letter-spacing="2.2" fill="#DCE6FF">CLOUD SECURITY ENGINEER</text>
+
+  <text x="60" y="182" class="sans" font-size="88" font-weight="800" letter-spacing="-3" fill="url(#name)">Ahmed Hany</text>
+  <text x="64" y="228" class="sans" font-size="25" fill="#C3CEE6">Detection and response engineering</text>
+
+  <g class="sans" font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+    <rect x="64" y="252" width="74" height="36" rx="18" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.20"/>
+    <text x="101" y="276">AWS</text>
+    <rect x="148" y="252" width="86" height="36" rx="18" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.20"/>
+    <text x="191" y="276">Azure</text>
+    <rect x="244" y="252" width="132" height="36" rx="18" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.20"/>
+    <text x="310" y="276">Kubernetes</text>
+  </g>
+
+  <text x="64" y="334" class="mono" font-size="14.5" fill="#AAB6D3"><tspan fill="#FFB37A">//</tspan> evidence first, never a guess</text>
 </svg>

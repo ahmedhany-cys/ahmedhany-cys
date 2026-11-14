@@ -8,7 +8,8 @@
     assets/banner-dark.svg, assets/banner-light.svg   GitHub swaps them by theme through <picture>
     assets/work/*.svg                                  one 16:9 cover per project, in a window frame
     scripts/build_assets.py                            rebuilds all of the above (screenshots live in assets/src/)
-  Colours: accent #7AA2F7 on dark and #3558D6 on light; orange #FF9E64 / #BC4C00 marks severity only.
+  Banner: one composition in two colourings, ink for dark mode and royal blue for light mode. Its path runs
+  from blue to orange, and orange means risk everywhere on this page.
   Pull request status badges are live from shields.io, so add a row and never edit a status by hand.
 -->
 
@@ -16,7 +17,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./assets/banner-dark.svg" />
     <source media="(prefers-color-scheme: light)" srcset="./assets/banner-light.svg" />
-    <img src="./assets/banner-dark.svg" width="100%" alt="Ahmed Hany, cloud security engineer. Detection and response on AWS, Azure and Kubernetes. Evidence first, never a guess." />
+    <img src="./assets/banner-dark.svg" width="100%" alt="Ahmed Hany, cloud security engineer. Detection and response engineering on AWS, Azure and Kubernetes. Evidence first, never a guess." />
   </picture>
 </div>
 
