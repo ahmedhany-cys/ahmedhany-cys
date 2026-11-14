@@ -19,42 +19,25 @@ SANS = '-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, A
 MONO = 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace'
 
 # --------------------------------------------------------------------------- banner
-# A neural network inside a cloud: signals enter on the left, travel through the layers and
-# light one output. One composition, two colourings, both dark heroes with white type so the
-# banner reads as a hero on either GitHub theme: ink for dark mode, royal blue for light mode.
-# Colour runs cold to hot, blue where a signal enters and orange where it becomes a finding.
+# A neural network held inside a cloud, drawn as line art: one thin contour for the cloud,
+# hairlines joining each layer to the next, small nodes, one cool accent, one warm output and
+# slow light. Two colourings of one composition, both navy with light type, so it holds up on
+# either GitHub theme.
 
 BW, BH = 1200, 380
 
 THEMES = {
-    "dark": dict(
-        base=("#070B16", "#0A1330", "#0A0E1C"), glow_a=("#2F6BFF", "0.40"), glow_b=("#FF7A2F", "0.32"),
-        glow_c=("#1FB6FF", "0.16"), grid="0.05", ink="#0A1022", edge="0.17", dim="0.62",
-        label="#AAB6D3", sub="#C3CEE6", pill_fill="0.06", pill_stroke="0.20", cloud=("0.11", "0.02"),
-    ),
-    "light": dict(
-        base=("#0B1D55", "#1741B0", "#0D2470"), glow_a=("#6CB0FF", "0.46"), glow_b=("#FF8A3D", "0.40"),
-        glow_c=("#7FD4FF", "0.22"), grid="0.07", ink="#0E2466", edge="0.24", dim="0.72",
-        label="#C9D8FF", sub="#DCE6FF", pill_fill="0.10", pill_stroke="0.30", cloud=("0.16", "0.04"),
-    ),
+    "dark": dict(base=("#0B1020", "#0D1529", "#090E1B"), glow="0.22", border="0.10"),
+    "light": dict(base=("#101C36", "#152647", "#0E1930"), glow="0.28", border="0.00"),
 }
+LINE, NODE, ACCENT, WARM = "#A9BAD6", "#D8E2F1", "#7FB2FF", "#E6BE8A"
 
-# cloud = four circles sitting on one base line; the outline is traced arc by arc
+# cloud = four circles sitting on one base line; the contour is traced arc by arc
 BASE = 318
 LOBES = [(704, 238, 80), (806, 150, 88), (952, 142, 102), (1068, 230, 88)]
-
-# network layers (x, [y...]) and the heat colour of each layer
-LAYERS = [(704, [196, 240, 284]), (806, [104, 150, 196, 242, 288]), (904, [96, 144, 192, 240, 288]),
-          (1002, [118, 170, 222, 274]), (1094, [204, 262])]
-HEAT = ["#4DA3FF", "#63A2FB", "#8FA6F2", "#FFB37A", "#FF8A3D"]
-ACTIVE_EDGES = [  # (layer, from index, to index)
-    (0, 0, 2), (0, 1, 2), (0, 1, 3), (0, 2, 3),
-    (1, 2, 1), (1, 2, 2), (1, 3, 2), (1, 3, 3),
-    (2, 1, 1), (2, 2, 1), (2, 2, 2), (2, 3, 2),
-    (3, 1, 0), (3, 2, 0),
-]
-ACTIVE_NODES = [{0, 1, 2}, {2, 3}, {1, 2, 3}, {1, 2}, {0}]
-COMET = [(0, 1), (1, 2), (2, 2), (3, 1), (4, 0)]  # (layer, index) of the signal the eye follows
+COLUMNS = [676, 764, 852, 940, 1028, 1116]   # the network's layers
+PAD, STEP = 24, 44                           # inset from the contour, node spacing
+ROUTES = [0.5, 0.2, 0.8]                     # heights at which light crosses the cloud
 
 
 def _upper_intersection(c1, c2):
@@ -67,204 +50,130 @@ def _upper_intersection(c1, c2):
     return min(pts, key=lambda q: q[1])
 
 
-def cloud_path():
-    """Outline of the cloud as an SVG path, plus its length (for the light that runs round it)."""
+def cloud_path() -> str:
+    """Contour of the cloud as an SVG path."""
     stops = [(LOBES[0][0], BASE)]
     stops += [_upper_intersection(LOBES[i], LOBES[i + 1]) for i in range(len(LOBES) - 1)]
     stops += [(LOBES[-1][0], BASE)]
     d = f"M{LOBES[-1][0]} {BASE} H{LOBES[0][0]}"
-    length = LOBES[-1][0] - LOBES[0][0]
     for (cx, cy, r), (ax, ay), (bx, by) in zip(LOBES, stops, stops[1:]):
         sweep = (math.atan2(by - cy, bx - cx) - math.atan2(ay - cy, ax - cx)) % (2 * math.pi)
         d += f" A{r} {r} 0 {1 if sweep > math.pi else 0} 1 {bx:.1f} {by:.1f}"
-        length += r * sweep
-    return d + " Z", round(length)
+    return d + " Z"
+
+
+def _extent(x):
+    """Top and bottom of the cloud at this x."""
+    tops = [cy - math.sqrt(r * r - (x - cx) ** 2) for cx, cy, r in LOBES if abs(x - cx) < r]
+    (lx, ly, lr), (rx, ry, rr) = LOBES[0], LOBES[-1]
+    bottom = BASE
+    if x < lx:
+        bottom = ly + math.sqrt(lr * lr - (x - lx) ** 2)
+    elif x > rx:
+        bottom = ry + math.sqrt(rr * rr - (x - rx) ** 2)
+    return min(tops), bottom
+
+
+def network():
+    """Layers of (x, [y...]) that fill the cloud."""
+    layers = []
+    for x in COLUMNS:
+        top, bottom = _extent(x)
+        top, bottom = top + PAD, bottom - PAD
+        n = max(2, round((bottom - top) / STEP) + 1)
+        layers.append((x, [round(top + i * (bottom - top) / (n - 1), 1) for i in range(n)]))
+    return layers
 
 
 def banner(theme: str) -> str:
     c = THEMES[theme]
-    cloud_d, cloud_len = cloud_path()
-    dim_edges, hot_edges, flow_edges = [], [], []
-    for li, ((xa, ya), (xb, yb)) in enumerate(zip(LAYERS, LAYERS[1:])):
-        for i, y1 in enumerate(ya):
-            for j, y2 in enumerate(yb):
-                line = f'<line x1="{xa}" y1="{y1}" x2="{xb}" y2="{y2}"/>'
-                if (li, i, j) in ACTIVE_EDGES:
-                    hot_edges.append("    " + line)
-                    flow_edges.append(f'    <line class="flow f{li}" x1="{xa}" y1="{y1}" x2="{xb}" y2="{y2}"/>')
-                else:
-                    dim_edges.append("    " + line)
-    dim_nodes, hot_nodes = [], []
-    for li, (x, ys) in enumerate(LAYERS):
-        for i, y in enumerate(ys):
-            if i not in ACTIVE_NODES[li]:
-                dim_nodes.append(f'    <circle cx="{x}" cy="{y}" r="6"/>')
-            elif li < len(LAYERS) - 1:
-                col = HEAT[li]
-                hot_nodes.append(
-                    f'    <circle class="fire f{li}" cx="{x}" cy="{y}" r="19" fill="{col}" opacity="0.16"/>\n'
-                    f'    <circle cx="{x}" cy="{y}" r="9.5" fill="{c["ink"]}" stroke="{col}" stroke-width="2.5"/>\n'
-                    f'    <circle cx="{x}" cy="{y}" r="3.6" fill="{col}"/>')
-    comet_d = "M" + " L".join(f"{LAYERS[l][0]} {LAYERS[l][1][i]}" for l, i in COMET)
-    tx, ty = LAYERS[-1][0], LAYERS[-1][1][0]
-    x0 = LAYERS[0][0]
+    layers = network()
+    links = [f'    <line x1="{xa}" y1="{y1}" x2="{xb}" y2="{y2}"/>'
+             for (xa, ya), (xb, yb) in zip(layers, layers[1:]) for y1 in ya for y2 in yb]
+    routes = [[(x, ys[min(len(ys) - 1, round(f * (len(ys) - 1)))]) for x, ys in layers] for f in ROUTES]
+    main = routes[0]
+    lit = {pt for r in routes for pt in r}
+    nodes = "\n".join(f'    <circle cx="{x}" cy="{y}" r="3"/>' for x, ys in layers for y in ys if (x, y) not in lit)
+    lit_nodes = "\n".join(f'    <circle cx="{x}" cy="{y}" r="3.6"/>' for x, y in sorted(lit) if (x, y) != main[-1])
+    halos = "\n".join(f'    <circle class="tw t{i % 3}" cx="{x}" cy="{y}" r="11"/>' for i, (x, y) in enumerate(main[:-1]))
+    paths = "\n".join(
+        f'  <path d="M{" L".join(f"{x} {y}" for x, y in r)}" fill="none" stroke="{ACCENT}" stroke-width="1.2" stroke-opacity="0.55" stroke-linejoin="round"/>\n'
+        f'  <path class="glide g{i}" d="M{" L".join(f"{x} {y}" for x, y in r)}" pathLength="1000" fill="none" stroke="#F1F6FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+        for i, r in enumerate(routes))
+    ex, ey = main[-1]
+    cloud = cloud_path()
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{BW}" height="{BH}" viewBox="0 0 {BW} {BH}" role="img" aria-labelledby="t d">
   <title id="t">Ahmed Hany, cloud security engineer</title>
-  <desc id="d">Detection and response engineering on AWS, Azure and Kubernetes. A cloud drawn in light holds a neural network: signals enter on the left, flow through the layers and light up one output.</desc>
+  <desc id="d">Detection and response engineering on AWS, Azure and Kubernetes. A cloud in fine line art holds a neural network, and light travels slowly through its layers.</desc>
   <defs>
     <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="{c["base"][0]}"/>
-      <stop offset="0.55" stop-color="{c["base"][1]}"/>
+      <stop offset="0.5" stop-color="{c["base"][1]}"/>
       <stop offset="1" stop-color="{c["base"][2]}"/>
     </linearGradient>
-    <radialGradient id="ga" cx="890" cy="180" r="470" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="{c["glow_a"][0]}" stop-opacity="{c["glow_a"][1]}"/>
-      <stop offset="1" stop-color="{c["glow_a"][0]}" stop-opacity="0"/>
+    <radialGradient id="glow" cx="900" cy="190" r="440" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3D6FD6" stop-opacity="{c["glow"]}"/>
+      <stop offset="1" stop-color="#3D6FD6" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="gb" cx="{tx}" cy="{ty}" r="210" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="{c["glow_b"][0]}" stop-opacity="{c["glow_b"][1]}"/>
-      <stop offset="1" stop-color="{c["glow_b"][0]}" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="gc" cx="90" cy="400" r="330" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="{c["glow_c"][0]}" stop-opacity="{c["glow_c"][1]}"/>
-      <stop offset="1" stop-color="{c["glow_c"][0]}" stop-opacity="0"/>
-    </radialGradient>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M40 0H0V40" fill="none" stroke="#FFFFFF" stroke-opacity="{c["grid"]}" stroke-width="1"/>
-    </pattern>
-    <linearGradient id="reveal" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0.30" stop-color="#000"/>
-      <stop offset="0.72" stop-color="#fff"/>
-    </linearGradient>
-    <mask id="right"><rect width="{BW}" height="{BH}" fill="url(#reveal)"/></mask>
-    <linearGradient id="heat" x1="{x0}" y1="0" x2="{tx}" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#4DA3FF"/>
-      <stop offset="0.5" stop-color="#8FA6F2"/>
-      <stop offset="0.78" stop-color="#FFB37A"/>
-      <stop offset="1" stop-color="#FF8A3D"/>
-    </linearGradient>
     <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#FFFFFF" stop-opacity="{c["cloud"][0]}"/>
-      <stop offset="1" stop-color="#FFFFFF" stop-opacity="{c["cloud"][1]}"/>
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.01"/>
     </linearGradient>
-    <linearGradient id="edge" x1="620" y1="0" x2="1160" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#7DB8FF"/>
-      <stop offset="0.6" stop-color="#DCE8FF"/>
-      <stop offset="1" stop-color="#FFB37A"/>
+    <linearGradient id="contour" x1="620" y1="0" x2="1160" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8FB4F0"/>
+      <stop offset="0.55" stop-color="#E6EEFA"/>
+      <stop offset="1" stop-color="#C9D6EC"/>
     </linearGradient>
-    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#4DA3FF" stop-opacity="0.9"/>
-      <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.14"/>
-      <stop offset="1" stop-color="#FF8A3D" stop-opacity="0.9"/>
-    </linearGradient>
-    <linearGradient id="name" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0.35" stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#C4D8FF"/>
-    </linearGradient>
-    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="6"/>
-    </filter>
-    <clipPath id="frame"><rect x="1" y="1" width="{BW - 2}" height="{BH - 2}" rx="24"/></clipPath>
+    <clipPath id="frame"><rect width="{BW}" height="{BH}" rx="14"/></clipPath>
   </defs>
   <style>
     .sans {{ font-family: {SANS}; }}
-    .mono {{ font-family: {MONO}; }}
-    .flow {{ stroke-dasharray: 2 22; animation: flow 1.2s linear infinite; }}
-    .fire {{ animation: fire 2.8s ease-in-out infinite; }}
-    .f1 {{ animation-delay: 0.3s; }} .f2 {{ animation-delay: 0.6s; }} .f3 {{ animation-delay: 0.9s; }}
-    .run {{ stroke-dasharray: 110 {cloud_len - 110}; animation: run 9s linear infinite; }}
-    .up {{ stroke-dasharray: 3 10; animation: up 1.1s linear infinite; }}
-    .live {{ animation: live 2.4s ease-in-out infinite; }}
-    @keyframes flow {{ to {{ stroke-dashoffset: -24; }} }}
-    @keyframes fire {{ 0%, 100% {{ opacity: 0.10; }} 30% {{ opacity: 0.42; }} }}
-    @keyframes run {{ to {{ stroke-dashoffset: -{cloud_len}; }} }}
-    @keyframes up {{ to {{ stroke-dashoffset: -13; }} }}
-    @keyframes live {{ 0%, 100% {{ opacity: 1; }} 50% {{ opacity: 0.3; }} }}
+    .glide {{ stroke-dasharray: 80 920; stroke-dashoffset: 80; animation: glide 8s linear infinite; }}
+    .g1 {{ animation-duration: 11s; animation-delay: -4s; }}
+    .g2 {{ animation-duration: 13s; animation-delay: -8s; }}
+    .tw {{ animation: tw 7s ease-in-out infinite; }}
+    .t1 {{ animation-delay: -2.3s; }} .t2 {{ animation-delay: -4.6s; }}
+    @keyframes glide {{ to {{ stroke-dashoffset: -920; }} }}
+    @keyframes tw {{ 0%, 100% {{ opacity: 0.08; }} 50% {{ opacity: 0.24; }} }}
     @media (prefers-reduced-motion: reduce) {{
-      .flow, .fire, .run, .up, .live {{ animation: none; }}
-      .motion {{ display: none; }}
+      .tw {{ animation: none; }}
+      .glide {{ animation: none; opacity: 0; }}
     }}
   </style>
 
   <g clip-path="url(#frame)">
     <rect width="{BW}" height="{BH}" fill="url(#base)"/>
-    <rect width="{BW}" height="{BH}" fill="url(#grid)" mask="url(#right)"/>
-    <rect width="{BW}" height="{BH}" fill="url(#ga)"/>
-    <rect width="{BW}" height="{BH}" fill="url(#gc)"/>
-    <rect width="{BW}" height="{BH}" fill="url(#gb)"/>
+    <rect width="{BW}" height="{BH}" fill="url(#glow)"/>
+  </g>
+  <rect x="0.5" y="0.5" width="{BW - 1}" height="{BH - 1}" rx="14" fill="none" stroke="#FFFFFF" stroke-opacity="{c["border"]}"/>
 
-    <!-- uplinks: telemetry streaming into the cloud -->
-    <g class="up" fill="none" stroke="#9CC7FF" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round">
-      <path d="M770 {BH} V{BASE + 5}"/>
-      <path d="M886 {BH} V{BASE + 5}"/>
-      <path d="M1002 {BH} V{BASE + 5}"/>
-    </g>
-  </g>
-  <rect x="1" y="1" width="{BW - 2}" height="{BH - 2}" rx="24" fill="none" stroke="url(#rim)" stroke-width="2"/>
+  <!-- the cloud, one thin contour -->
+  <path d="{cloud}" fill="url(#skin)" stroke="url(#contour)" stroke-width="1.6" stroke-opacity="0.85" stroke-linejoin="round"/>
 
-  <!-- the cloud -->
-  <path d="{cloud_d}" fill="none" stroke="url(#edge)" stroke-width="8" opacity="0.55" filter="url(#soft)"/>
-  <path d="{cloud_d}" fill="url(#skin)" stroke="url(#edge)" stroke-width="2.5" stroke-linejoin="round"/>
-  <path class="run" d="{cloud_d}" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-
-  <!-- the network: every layer fully connected to the next -->
-  <g stroke="#C4D3F0" stroke-opacity="{c["edge"]}" stroke-width="1">
-{chr(10).join(dim_edges)}
+  <!-- the network: every layer joined to the next -->
+  <g stroke="{LINE}" stroke-opacity="0.20" stroke-width="0.8">
+{chr(10).join(links)}
   </g>
-  <g stroke="url(#heat)" stroke-width="7" stroke-linecap="round" opacity="0.5" filter="url(#soft)">
-{chr(10).join(hot_edges)}
+{paths}
+  <g fill="{ACCENT}" opacity="0.08">
+{halos}
   </g>
-  <g stroke="url(#heat)" stroke-width="2.4" stroke-linecap="round">
-{chr(10).join(hot_edges)}
+  <g fill="{NODE}">
+{nodes}
   </g>
-  <g stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="2.6" stroke-linecap="round">
-{chr(10).join(flow_edges)}
+  <g fill="{ACCENT}">
+{lit_nodes}
   </g>
-  <g fill="{c["ink"]}" stroke="#C4D3F0" stroke-opacity="{c["dim"]}" stroke-width="1.5">
-{chr(10).join(dim_nodes)}
-  </g>
-  <g>
-{chr(10).join(hot_nodes)}
-  </g>
-
-  <!-- the output that fires -->
-  <circle cx="{tx}" cy="{ty}" r="34" fill="#FF8A3D" opacity="0.22"/>
-  <circle class="motion" cx="{tx}" cy="{ty}" r="13" fill="none" stroke="#FF8A3D" stroke-width="2" opacity="0">
-    <animate attributeName="r" dur="2.8s" repeatCount="indefinite" values="13;13;44" keyTimes="0;0.45;1"/>
-    <animate attributeName="opacity" dur="2.8s" repeatCount="indefinite" values="0;0.9;0" keyTimes="0;0.45;1"/>
-  </circle>
-  <circle cx="{tx}" cy="{ty}" r="14" fill="{c["ink"]}" stroke="#FF8A3D" stroke-width="3"/>
-  <circle cx="{tx}" cy="{ty}" r="5.5" fill="#FF8A3D"/>
-
-  <!-- one signal to follow -->
-  <path id="signal" d="{comet_d}" fill="none"/>
-  <g class="motion" opacity="0">
-    <circle r="10" fill="#FFFFFF" opacity="0.25"/>
-    <circle r="5" fill="#FFFFFF"/>
-    <animateMotion dur="2.8s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;1" keyTimes="0;0.45;1">
-      <mpath href="#signal"/>
-    </animateMotion>
-    <animate attributeName="opacity" dur="2.8s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.04;0.41;0.45;1"/>
-  </g>
+  <circle cx="{ex}" cy="{ey}" r="11" fill="none" stroke="{WARM}" stroke-opacity="0.6" stroke-width="1.2"/>
+  <circle cx="{ex}" cy="{ey}" r="4.2" fill="{WARM}"/>
 
   <!-- identity -->
-  <rect x="64" y="56" width="288" height="34" rx="17" fill="#FFFFFF" fill-opacity="{c["pill_fill"]}" stroke="#FFFFFF" stroke-opacity="{c["pill_stroke"]}"/>
-  <circle class="live" cx="84" cy="73" r="4.5" fill="#4ADE80"/>
-  <text x="100" y="78" class="mono" font-size="13" font-weight="600" letter-spacing="2.2" fill="#DCE6FF">CLOUD SECURITY ENGINEER</text>
-
-  <text x="60" y="182" class="sans" font-size="88" font-weight="800" letter-spacing="-3" fill="url(#name)">Ahmed Hany</text>
-  <text x="64" y="228" class="sans" font-size="25" fill="{c["sub"]}">Detection and response engineering</text>
-
-  <g class="sans" font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">
-    <rect x="64" y="252" width="74" height="36" rx="18" fill="#FFFFFF" fill-opacity="{c["pill_fill"]}" stroke="#FFFFFF" stroke-opacity="{c["pill_stroke"]}"/>
-    <text x="101" y="276">AWS</text>
-    <rect x="148" y="252" width="86" height="36" rx="18" fill="#FFFFFF" fill-opacity="{c["pill_fill"]}" stroke="#FFFFFF" stroke-opacity="{c["pill_stroke"]}"/>
-    <text x="191" y="276">Azure</text>
-    <rect x="244" y="252" width="132" height="36" rx="18" fill="#FFFFFF" fill-opacity="{c["pill_fill"]}" stroke="#FFFFFF" stroke-opacity="{c["pill_stroke"]}"/>
-    <text x="310" y="276">Kubernetes</text>
-  </g>
-
-  <text x="64" y="334" class="mono" font-size="14.5" fill="{c["label"]}"><tspan fill="#FFB37A">//</tspan> evidence first, never a guess</text>
+  <rect x="72" y="111" width="30" height="1.5" fill="{ACCENT}" opacity="0.9"/>
+  <text x="116" y="117" class="sans" font-size="13" font-weight="600" letter-spacing="3.4" fill="#9DB6DC">CLOUD SECURITY ENGINEER</text>
+  <text x="69" y="198" class="sans" font-size="78" font-weight="600" letter-spacing="-2" fill="#F4F7FB">Ahmed Hany</text>
+  <text x="72" y="240" class="sans" font-size="22" fill="#A8B5CB">Detection and response engineering</text>
+  <rect x="72" y="266" width="350" height="1" fill="#FFFFFF" opacity="0.14"/>
+  <text x="72" y="298" class="sans" font-size="12.5" font-weight="600" letter-spacing="3" fill="#C6D1E3">AWS<tspan dx="16" fill="#5E6E8C">/</tspan><tspan dx="16">AZURE</tspan><tspan dx="16" fill="#5E6E8C">/</tspan><tspan dx="16">KUBERNETES</tspan></text>
 </svg>
 """
 

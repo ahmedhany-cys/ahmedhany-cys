@@ -8,8 +8,8 @@
     assets/banner-dark.svg, assets/banner-light.svg   GitHub swaps them by theme through <picture>
     assets/work/*.svg                                  one 16:9 cover per project, in a window frame
     scripts/build_assets.py                            rebuilds all of the above (screenshots live in assets/src/)
-  Banner: a neural network inside a cloud, in two colourings (ink for dark mode, royal blue for light mode).
-  Signals run from blue to orange, and orange means a finding or a risk everywhere on this page.
+  Banner: line art of a neural network inside a cloud, navy in both themes (a shade lighter in light mode).
+  Keep it quiet: thin lines, small nodes, one blue accent, one warm node, slow light.
   Pull request status badges are live from shields.io, so add a row and never edit a status by hand.
 -->
 
@@ -17,7 +17,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./assets/banner-dark.svg" />
     <source media="(prefers-color-scheme: light)" srcset="./assets/banner-light.svg" />
-    <img src="./assets/banner-dark.svg" width="100%" alt="Ahmed Hany, cloud security engineer. Detection and response engineering on AWS, Azure and Kubernetes. Evidence first, never a guess." />
+    <img src="./assets/banner-dark.svg" width="100%" alt="Ahmed Hany, cloud security engineer. Detection and response engineering on AWS, Azure and Kubernetes." />
   </picture>
 </div>
 
