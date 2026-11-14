@@ -8,6 +8,7 @@ self-contained SVG. Terminal covers are drawn from the text in this file. No dep
 """
 import base64
 import math
+import random
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
@@ -19,161 +20,204 @@ SANS = '-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, A
 MONO = 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace'
 
 # --------------------------------------------------------------------------- banner
-# A neural network held inside a cloud, drawn as line art: one thin contour for the cloud,
-# hairlines joining each layer to the next, small nodes, one cool accent, one warm output and
-# slow light. Two colourings of one composition, both navy with light type, so it holds up on
-# either GitHub theme.
+# Cloud security, in motion. One large cloud is built from horizontal bands of light that slide
+# at different speeds, with a slipstream behind it. On top sits the security story: a shield in
+# the cloud, a scan beam sweeping it, a patrolled perimeter, and threats stopped at the edge.
+# Graphite throughout (black, grey, white) with one amber accent and red only for threats.
+# Two colourings of one composition: near-black for dark mode, charcoal for light mode.
 
-BW, BH = 1200, 380
+BW, BH = 1200, 360
 
 THEMES = {
-    "dark": dict(base=("#0B1020", "#0D1529", "#090E1B"), glow="0.22", border="0.10"),
-    "light": dict(base=("#101C36", "#152647", "#0E1930"), glow="0.28", border="0.00"),
+    "dark": dict(sky=("#09090B", "#18181B", "#2C2C31"), glow="0.12", border="0.12"),
+    "light": dict(sky=("#141416", "#232327", "#3A3A40"), glow="0.14", border="0.00"),
 }
-LINE, NODE, ACCENT, WARM = "#A9BAD6", "#D8E2F1", "#7FB2FF", "#E6BE8A"
+PALE, GREY, ACCENT, THREAT = "#E4E4E7", "#A1A1AA", "#FBBF24", "#F87171"
+SUB, SMALL, SLASH = "#C4C4CC", "#E4E4E7", "#71717A"
 
-# cloud = four circles sitting on one base line; the contour is traced arc by arc
-BASE = 318
-LOBES = [(704, 238, 80), (806, 150, 88), (952, 142, 102), (1068, 230, 88)]
-COLUMNS = [676, 764, 852, 940, 1028, 1116]   # the network's layers
-PAD, STEP = 24, 44                           # inset from the contour, node spacing
-ROUTES = [0.5, 0.2, 0.8]                     # heights at which light crosses the cloud
-
-
-def _upper_intersection(c1, c2):
-    (x1, y1, r1), (x2, y2, r2) = c1, c2
-    d = math.hypot(x2 - x1, y2 - y1)
-    a = (r1 * r1 - r2 * r2 + d * d) / (2 * d)
-    h = math.sqrt(r1 * r1 - a * a)
-    mx, my = x1 + a * (x2 - x1) / d, y1 + a * (y2 - y1) / d
-    pts = [(mx + h * (y2 - y1) / d, my - h * (x2 - x1) / d), (mx - h * (y2 - y1) / d, my + h * (x2 - x1) / d)]
-    return min(pts, key=lambda q: q[1])
+# cloud outline: four circles standing on one base line, relative to the cloud's centre
+REL = [(-170, 40, 70), (-78, -34, 84), (58, -52, 100), (172, 26, 84)]
+REL_BASE = 110
+CX, CY, SCALE = 902, 190, 1.08
+SHIELD = "M0 -52 L40 -38 V-6 C40 24 21 42 0 51 C-21 42 -40 24 -40 -6 V-38 Z"
+TICK = "M-18 -3 L-5 10 L19 -16"
+THREAT_STARTS = [(850, -20), (1215, -10), (1215, 372), (1000, 380), (700, -20)]  # where threats come from
+TRAIL = [(118, 468, 150, 2.6), (150, 420, 190, 3.4), (186, 452, 170, 2.2), (222, 404, 210, 3.0),
+         (258, 470, 140, 2.8), (290, 500, 110, 3.6)]                             # y, x, length, seconds
 
 
-def cloud_path() -> str:
-    """Contour of the cloud as an SVG path."""
-    stops = [(LOBES[0][0], BASE)]
-    stops += [_upper_intersection(LOBES[i], LOBES[i + 1]) for i in range(len(LOBES) - 1)]
-    stops += [(LOBES[-1][0], BASE)]
-    d = f"M{LOBES[-1][0]} {BASE} H{LOBES[0][0]}"
-    for (cx, cy, r), (ax, ay), (bx, by) in zip(LOBES, stops, stops[1:]):
-        sweep = (math.atan2(by - cy, bx - cx) - math.atan2(ay - cy, ax - cx)) % (2 * math.pi)
-        d += f" A{r} {r} 0 {1 if sweep > math.pi else 0} 1 {bx:.1f} {by:.1f}"
+def cloud(cx, cy, s=1.0) -> str:
+    """Outline of the cloud as an SVG path, traced arc by arc."""
+    lobes = [(cx + x * s, cy + y * s, r * s) for x, y, r in REL]
+    base = cy + REL_BASE * s
+
+    def upper(c1, c2):
+        (x1, y1, r1), (x2, y2, r2) = c1, c2
+        d = math.hypot(x2 - x1, y2 - y1)
+        a = (r1 * r1 - r2 * r2 + d * d) / (2 * d)
+        h = math.sqrt(max(0.0, r1 * r1 - a * a))
+        mx, my = x1 + a * (x2 - x1) / d, y1 + a * (y2 - y1) / d
+        pts = [(mx + h * (y2 - y1) / d, my - h * (x2 - x1) / d), (mx - h * (y2 - y1) / d, my + h * (x2 - x1) / d)]
+        return min(pts, key=lambda q: q[1])
+
+    stops = [(lobes[0][0], base)] + [upper(lobes[i], lobes[i + 1]) for i in range(len(lobes) - 1)] + [(lobes[-1][0], base)]
+    d = f"M{lobes[-1][0]:.1f} {base:.1f} H{lobes[0][0]:.1f}"
+    for (x, y, r), (ax, ay), (bx, by) in zip(lobes, stops, stops[1:]):
+        sweep = (math.atan2(by - y, bx - x) - math.atan2(ay - y, ax - x)) % (2 * math.pi)
+        d += f" A{r:.1f} {r:.1f} 0 {1 if sweep > math.pi else 0} 1 {bx:.1f} {by:.1f}"
     return d + " Z"
 
 
-def _extent(x):
-    """Top and bottom of the cloud at this x."""
-    tops = [cy - math.sqrt(r * r - (x - cx) ** 2) for cx, cy, r in LOBES if abs(x - cx) < r]
-    (lx, ly, lr), (rx, ry, rr) = LOBES[0], LOBES[-1]
-    bottom = BASE
-    if x < lx:
-        bottom = ly + math.sqrt(lr * lr - (x - lx) ** 2)
-    elif x > rx:
-        bottom = ry + math.sqrt(rr * rr - (x - rx) ** 2)
-    return min(tops), bottom
+def bands():
+    """The sliding bands that fill the cloud: one <line> and one @keyframes rule per row."""
+    rng = random.Random(9)   # fixed seed, so every build draws the same cloud
+    top, base = CY + (-52 - 100) * SCALE, CY + REL_BASE * SCALE
+    lines, frames = [], []
+    y, i = top + 15, 0
+    while y < base - 6:
+        segs = [rng.choice([34, 52, 76, 110, 150, 190]) for _ in range(4)]
+        gaps = [rng.choice([16, 22, 30]) for _ in range(4)]
+        dash = " ".join(f"{a} {b}" for a, b in zip(segs, gaps))
+        dur = rng.choice([7, 9, 11, 13, 16])
+        op = rng.choice([0.55, 0.7, 0.85, 1.0])
+        lines.append(f'      <line x1="560" y1="{y:.0f}" x2="1240" y2="{y:.0f}" stroke-dasharray="{dash}" '
+                     f'stroke-opacity="{op}" style="animation:slide{i} {dur}s linear infinite;animation-delay:-{rng.uniform(0, dur):.1f}s"/>')
+        frames.append(f"    @keyframes slide{i} {{ to {{ stroke-dashoffset: -{sum(segs) + sum(gaps)}; }} }}")
+        y += 21
+        i += 1
+    return "\n".join(lines), "\n".join(frames)
 
 
-def network():
-    """Layers of (x, [y...]) that fill the cloud."""
-    layers = []
-    for x in COLUMNS:
-        top, bottom = _extent(x)
-        top, bottom = top + PAD, bottom - PAD
-        n = max(2, round((bottom - top) / STEP) + 1)
-        layers.append((x, [round(top + i * (bottom - top) / (n - 1), 1) for i in range(n)]))
-    return layers
+def threats(cx, cy, rx, ry) -> str:
+    """Dots that fly in from outside and are stopped, with a flash, where they meet the perimeter."""
+    out, cycle = "", 6.5
+    for k, (sx, sy) in enumerate(THREAT_STARTS):
+        dx, dy = sx - cx, sy - cy
+        t = 1 / math.sqrt((dx / rx) ** 2 + (dy / ry) ** 2)
+        ex, ey = cx + dx * t, cy + dy * t
+        begin = -k * cycle / len(THREAT_STARTS)
+        out += f"""    <g class="motion">
+      <g opacity="0">
+        <circle r="8" fill="{THREAT}" opacity="0.3"/><circle r="3.4" fill="{THREAT}"/>
+        <animateMotion dur="{cycle}s" begin="{begin:.2f}s" repeatCount="indefinite" path="M{sx} {sy} L{ex:.1f} {ey:.1f}" keyPoints="0;1;1" keyTimes="0;0.4;1" calcMode="linear"/>
+        <animate attributeName="opacity" dur="{cycle}s" begin="{begin:.2f}s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.05;0.4;0.44;1"/>
+      </g>
+      <circle cx="{ex:.1f}" cy="{ey:.1f}" r="3" fill="none" stroke="{THREAT}" stroke-width="2" opacity="0">
+        <animate attributeName="r" dur="{cycle}s" begin="{begin:.2f}s" repeatCount="indefinite" values="3;3;20;20" keyTimes="0;0.4;0.56;1"/>
+        <animate attributeName="opacity" dur="{cycle}s" begin="{begin:.2f}s" repeatCount="indefinite" values="0;0;1;0;0" keyTimes="0;0.39;0.4;0.56;1"/>
+      </circle>
+    </g>
+"""
+    return out
 
 
 def banner(theme: str) -> str:
     c = THEMES[theme]
-    layers = network()
-    links = [f'    <line x1="{xa}" y1="{y1}" x2="{xb}" y2="{y2}"/>'
-             for (xa, ya), (xb, yb) in zip(layers, layers[1:]) for y1 in ya for y2 in yb]
-    routes = [[(x, ys[min(len(ys) - 1, round(f * (len(ys) - 1)))]) for x, ys in layers] for f in ROUTES]
-    main = routes[0]
-    lit = {pt for r in routes for pt in r}
-    nodes = "\n".join(f'    <circle cx="{x}" cy="{y}" r="3"/>' for x, ys in layers for y in ys if (x, y) not in lit)
-    lit_nodes = "\n".join(f'    <circle cx="{x}" cy="{y}" r="3.6"/>' for x, y in sorted(lit) if (x, y) != main[-1])
-    halos = "\n".join(f'    <circle class="tw t{i % 3}" cx="{x}" cy="{y}" r="11"/>' for i, (x, y) in enumerate(main[:-1]))
-    paths = "\n".join(
-        f'  <path d="M{" L".join(f"{x} {y}" for x, y in r)}" fill="none" stroke="{ACCENT}" stroke-width="1.2" stroke-opacity="0.55" stroke-linejoin="round"/>\n'
-        f'  <path class="glide g{i}" d="M{" L".join(f"{x} {y}" for x, y in r)}" pathLength="1000" fill="none" stroke="#F1F6FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
-        for i, r in enumerate(routes))
-    ex, ey = main[-1]
-    cloud = cloud_path()
+    shape = cloud(CX, CY, SCALE)
+    lines, frames = bands()
+    px, py, rx, ry = CX, CY + 6, 300, 148          # the perimeter
+    ring = f"M{px - rx} {py} A{rx} {ry} 0 1 1 {px + rx} {py} A{rx} {ry} 0 1 1 {px - rx} {py}"
+    trail = "".join(
+        f'      <line x1="{x0}" y1="{y}" x2="{x0 + ln}" y2="{y}" stroke-dasharray="26 18" '
+        f'style="animation:wind {dur}s linear infinite;animation-delay:-{k * 0.5:.1f}s"/>\n'
+        for k, (y, x0, ln, dur) in enumerate(TRAIL))
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{BW}" height="{BH}" viewBox="0 0 {BW} {BH}" role="img" aria-labelledby="t d">
   <title id="t">Ahmed Hany, cloud security engineer</title>
-  <desc id="d">Detection and response engineering on AWS, Azure and Kubernetes. A cloud in fine line art holds a neural network, and light travels slowly through its layers.</desc>
+  <desc id="d">Detection and response engineering on AWS, Azure and Kubernetes. A cloud built from sliding bands of light carries a shield. A scan beam sweeps it and threats are stopped at its perimeter.</desc>
   <defs>
-    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="{c["base"][0]}"/>
-      <stop offset="0.5" stop-color="{c["base"][1]}"/>
-      <stop offset="1" stop-color="{c["base"][2]}"/>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="{c["sky"][0]}"/><stop offset="0.55" stop-color="{c["sky"][1]}"/><stop offset="1" stop-color="{c["sky"][2]}"/>
     </linearGradient>
-    <radialGradient id="glow" cx="900" cy="190" r="440" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#3D6FD6" stop-opacity="{c["glow"]}"/>
-      <stop offset="1" stop-color="#3D6FD6" stop-opacity="0"/>
+    <radialGradient id="glow" cx="{CX}" cy="{CY}" r="440" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="{c["glow"]}"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.07"/>
-      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.01"/>
+    <linearGradient id="band" x1="640" y1="0" x2="1170" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.5" stop-color="{PALE}"/><stop offset="1" stop-color="{GREY}"/>
     </linearGradient>
-    <linearGradient id="contour" x1="620" y1="0" x2="1160" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#8FB4F0"/>
-      <stop offset="0.55" stop-color="#E6EEFA"/>
-      <stop offset="1" stop-color="#C9D6EC"/>
+    <linearGradient id="trailfade" x1="400" y1="0" x2="650" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#fff"/>
     </linearGradient>
-    <clipPath id="frame"><rect width="{BW}" height="{BH}" rx="14"/></clipPath>
+    <mask id="tm"><rect width="{BW}" height="{BH}" fill="url(#trailfade)"/></mask>
+    <linearGradient id="rimlight" x1="0" y1="20" x2="0" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.9"/><stop offset="0.6" stop-color="#FFFFFF" stop-opacity="0.15"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0.42"/>
+    </linearGradient>
+    <filter id="aura" x="-30%" y="-40%" width="160%" height="180%"><feGaussianBlur stdDeviation="26"/></filter>
+    <clipPath id="shape"><path d="{shape}"/></clipPath>
+    <clipPath id="frame"><rect width="{BW}" height="{BH}" rx="16"/></clipPath>
   </defs>
   <style>
     .sans {{ font-family: {SANS}; }}
-    .glide {{ stroke-dasharray: 80 920; stroke-dashoffset: 80; animation: glide 8s linear infinite; }}
-    .g1 {{ animation-duration: 11s; animation-delay: -4s; }}
-    .g2 {{ animation-duration: 13s; animation-delay: -8s; }}
-    .tw {{ animation: tw 7s ease-in-out infinite; }}
-    .t1 {{ animation-delay: -2.3s; }} .t2 {{ animation-delay: -4.6s; }}
-    @keyframes glide {{ to {{ stroke-dashoffset: -920; }} }}
-    @keyframes tw {{ 0%, 100% {{ opacity: 0.08; }} 50% {{ opacity: 0.24; }} }}
+    .hero {{ animation: bob 8s ease-in-out infinite; }}
+{frames}
+    .perim {{ stroke-dasharray: 3 9; animation: march 2.6s linear infinite; }}
+    .scan {{ animation: scan 5.5s ease-in-out infinite; }}
+    .shield {{ stroke-dasharray: 100; animation: draw 8s ease-in-out infinite; }}
+    .tick {{ stroke-dasharray: 100; animation: tick 8s ease-in-out infinite; }}
+    @keyframes march {{ to {{ stroke-dashoffset: -24; }} }}
+    @keyframes scan {{ 0% {{ transform: translateX(0); opacity: 0; }} 8% {{ opacity: 1; }} 62% {{ transform: translateX(680px); opacity: 1; }} 70%, 100% {{ transform: translateX(680px); opacity: 0; }} }}
+    @keyframes draw {{ 0% {{ stroke-dashoffset: 100; }} 30%, 100% {{ stroke-dashoffset: 0; }} }}
+    @keyframes tick {{ 0%, 30% {{ stroke-dashoffset: 100; }} 45%, 100% {{ stroke-dashoffset: 0; }} }}
+    @keyframes wind {{ to {{ stroke-dashoffset: -44; }} }}
+    @keyframes bob {{ 0%, 100% {{ transform: translateY(3px); }} 50% {{ transform: translateY(-5px); }} }}
     @media (prefers-reduced-motion: reduce) {{
-      .tw {{ animation: none; }}
-      .glide {{ animation: none; opacity: 0; }}
+      .hero, .hero line, .trail line, .perim, .shield, .tick {{ animation: none !important; }}
+      .scan, .motion {{ display: none; }}
     }}
   </style>
 
   <g clip-path="url(#frame)">
-    <rect width="{BW}" height="{BH}" fill="url(#base)"/>
+    <rect width="{BW}" height="{BH}" fill="url(#sky)"/>
     <rect width="{BW}" height="{BH}" fill="url(#glow)"/>
-  </g>
-  <rect x="0.5" y="0.5" width="{BW - 1}" height="{BH - 1}" rx="14" fill="none" stroke="#FFFFFF" stroke-opacity="{c["border"]}"/>
 
-  <!-- the cloud, one thin contour -->
-  <path d="{cloud}" fill="url(#skin)" stroke="url(#contour)" stroke-width="1.6" stroke-opacity="0.85" stroke-linejoin="round"/>
+    <!-- slipstream -->
+    <g class="trail" mask="url(#tm)" stroke="{PALE}" stroke-opacity="0.5" stroke-width="2.5" stroke-linecap="round">
+{trail}    </g>
 
-  <!-- the network: every layer joined to the next -->
-  <g stroke="{LINE}" stroke-opacity="0.20" stroke-width="0.8">
-{chr(10).join(links)}
-  </g>
-{paths}
-  <g fill="{ACCENT}" opacity="0.08">
-{halos}
-  </g>
-  <g fill="{NODE}">
-{nodes}
-  </g>
-  <g fill="{ACCENT}">
-{lit_nodes}
-  </g>
-  <circle cx="{ex}" cy="{ey}" r="11" fill="none" stroke="{WARM}" stroke-opacity="0.6" stroke-width="1.2"/>
-  <circle cx="{ex}" cy="{ey}" r="4.2" fill="{WARM}"/>
+    <g class="hero">
+      <path d="{shape}" fill="{GREY}" opacity="0.5" filter="url(#aura)"/>
+
+      <!-- perimeter and its patrol -->
+      <path class="perim" d="{ring}" fill="none" stroke="{PALE}" stroke-opacity="0.55" stroke-width="1.3" stroke-linecap="round"/>
+      <g class="motion">
+        <circle r="10" fill="{ACCENT}" opacity="0.35"><animateMotion dur="14s" repeatCount="indefinite" path="{ring}"/></circle>
+        <circle r="4.5" fill="#FFFFFF"><animateMotion dur="14s" repeatCount="indefinite" path="{ring}"/></circle>
+      </g>
+
+      <!-- the cloud: bands of light sliding inside its outline -->
+      <path d="{shape}" fill="#FFFFFF" fill-opacity="0.07"/>
+      <g clip-path="url(#shape)" stroke="url(#band)" stroke-width="11" stroke-linecap="round">
+{lines}
+      </g>
+      <path d="{shape}" fill="none" stroke="url(#rimlight)" stroke-width="1.6"/>
+
+      <!-- scan beam -->
+      <g clip-path="url(#shape)">
+        <g class="scan">
+          <rect x="{px - rx - 70}" y="0" width="90" height="{BH}" fill="url(#beam)"/>
+          <rect x="{px - rx + 18}" y="0" width="2" height="{BH}" fill="#FFFFFF" opacity="0.85"/>
+        </g>
+      </g>
+
+      <!-- shield -->
+      <g transform="translate({px} {py + 6})" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+        <path d="{SHIELD}" fill="{c["sky"][1]}" fill-opacity="0.55" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="1.5"/>
+        <path class="shield" pathLength="100" d="{SHIELD}" stroke-width="3.2"/>
+        <path class="tick" pathLength="100" d="{TICK}" stroke-width="4.5"/>
+      </g>
+    </g>
+
+    <!-- threats, stopped at the perimeter -->
+{threats(px, py, rx, ry)}  </g>
+  <rect x="0.5" y="0.5" width="{BW - 1}" height="{BH - 1}" rx="16" fill="none" stroke="#FFFFFF" stroke-opacity="{c["border"]}"/>
 
   <!-- identity -->
-  <rect x="72" y="111" width="30" height="1.5" fill="{ACCENT}" opacity="0.9"/>
-  <text x="116" y="117" class="sans" font-size="13" font-weight="600" letter-spacing="3.4" fill="#9DB6DC">CLOUD SECURITY ENGINEER</text>
-  <text x="69" y="198" class="sans" font-size="78" font-weight="600" letter-spacing="-2" fill="#F4F7FB">Ahmed Hany</text>
-  <text x="72" y="240" class="sans" font-size="22" fill="#A8B5CB">Detection and response engineering</text>
-  <rect x="72" y="266" width="350" height="1" fill="#FFFFFF" opacity="0.14"/>
-  <text x="72" y="298" class="sans" font-size="12.5" font-weight="600" letter-spacing="3" fill="#C6D1E3">AWS<tspan dx="16" fill="#5E6E8C">/</tspan><tspan dx="16">AZURE</tspan><tspan dx="16" fill="#5E6E8C">/</tspan><tspan dx="16">KUBERNETES</tspan></text>
+  <text x="72" y="112" class="sans" font-size="13" font-weight="600" letter-spacing="3.6" fill="{ACCENT}">CLOUD SECURITY ENGINEER</text>
+  <text x="68" y="196" class="sans" font-size="82" font-weight="700" letter-spacing="-2.6" fill="#FFFFFF">Ahmed Hany</text>
+  <text x="72" y="238" class="sans" font-size="22" fill="{SUB}">Detection and response engineering</text>
+  <text x="72" y="292" class="sans" font-size="12.5" font-weight="600" letter-spacing="3" fill="{SMALL}">AWS<tspan dx="14" fill="{SLASH}">/</tspan><tspan dx="14">AZURE</tspan><tspan dx="14" fill="{SLASH}">/</tspan><tspan dx="14">KUBERNETES</tspan></text>
 </svg>
 """
 

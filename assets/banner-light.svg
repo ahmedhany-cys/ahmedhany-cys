@@ -1,220 +1,183 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="380" viewBox="0 0 1200 380" role="img" aria-labelledby="t d">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="t d">
   <title id="t">Ahmed Hany, cloud security engineer</title>
-  <desc id="d">Detection and response engineering on AWS, Azure and Kubernetes. A cloud in fine line art holds a neural network, and light travels slowly through its layers.</desc>
+  <desc id="d">Detection and response engineering on AWS, Azure and Kubernetes. A cloud built from sliding bands of light carries a shield. A scan beam sweeps it and threats are stopped at its perimeter.</desc>
   <defs>
-    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#101C36"/>
-      <stop offset="0.5" stop-color="#152647"/>
-      <stop offset="1" stop-color="#0E1930"/>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141416"/><stop offset="0.55" stop-color="#232327"/><stop offset="1" stop-color="#3A3A40"/>
     </linearGradient>
-    <radialGradient id="glow" cx="900" cy="190" r="440" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#3D6FD6" stop-opacity="0.28"/>
-      <stop offset="1" stop-color="#3D6FD6" stop-opacity="0"/>
+    <radialGradient id="glow" cx="902" cy="190" r="440" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.14"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.07"/>
-      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.01"/>
+    <linearGradient id="band" x1="640" y1="0" x2="1170" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.5" stop-color="#E4E4E7"/><stop offset="1" stop-color="#6E7681"/>
     </linearGradient>
-    <linearGradient id="contour" x1="620" y1="0" x2="1160" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#8FB4F0"/>
-      <stop offset="0.55" stop-color="#E6EEFA"/>
-      <stop offset="1" stop-color="#C9D6EC"/>
+    <linearGradient id="trailfade" x1="400" y1="0" x2="650" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#fff"/>
     </linearGradient>
-    <clipPath id="frame"><rect width="1200" height="380" rx="14"/></clipPath>
+    <mask id="tm"><rect width="1200" height="360" fill="url(#trailfade)"/></mask>
+    <linearGradient id="rimlight" x1="0" y1="20" x2="0" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.9"/><stop offset="0.6" stop-color="#FFFFFF" stop-opacity="0.15"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0.42"/>
+    </linearGradient>
+    <filter id="aura" x="-30%" y="-40%" width="160%" height="180%"><feGaussianBlur stdDeviation="26"/></filter>
+    <clipPath id="shape"><path d="M1087.8 308.8 H718.4 A75.6 75.6 0 1 1 727.2 158.1 A90.7 90.7 0 0 1 871.1 79.9 A108.0 108.0 0 0 1 1072.5 128.7 A90.7 90.7 0 1 1 1087.8 308.8 Z"/></clipPath>
+    <clipPath id="frame"><rect width="1200" height="360" rx="16"/></clipPath>
   </defs>
   <style>
     .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif; }
-    .glide { stroke-dasharray: 80 920; stroke-dashoffset: 80; animation: glide 8s linear infinite; }
-    .g1 { animation-duration: 11s; animation-delay: -4s; }
-    .g2 { animation-duration: 13s; animation-delay: -8s; }
-    .tw { animation: tw 7s ease-in-out infinite; }
-    .t1 { animation-delay: -2.3s; } .t2 { animation-delay: -4.6s; }
-    @keyframes glide { to { stroke-dashoffset: -920; } }
-    @keyframes tw { 0%, 100% { opacity: 0.08; } 50% { opacity: 0.24; } }
+    .hero { animation: bob 8s ease-in-out infinite; }
+    @keyframes slide0 { to { stroke-dashoffset: -490; } }
+    @keyframes slide1 { to { stroke-dashoffset: -508; } }
+    @keyframes slide2 { to { stroke-dashoffset: -344; } }
+    @keyframes slide3 { to { stroke-dashoffset: -502; } }
+    @keyframes slide4 { to { stroke-dashoffset: -392; } }
+    @keyframes slide5 { to { stroke-dashoffset: -346; } }
+    @keyframes slide6 { to { stroke-dashoffset: -292; } }
+    @keyframes slide7 { to { stroke-dashoffset: -430; } }
+    @keyframes slide8 { to { stroke-dashoffset: -520; } }
+    @keyframes slide9 { to { stroke-dashoffset: -492; } }
+    @keyframes slide10 { to { stroke-dashoffset: -724; } }
+    @keyframes slide11 { to { stroke-dashoffset: -592; } }
+    @keyframes slide12 { to { stroke-dashoffset: -404; } }
+    .perim { stroke-dasharray: 3 9; animation: march 2.6s linear infinite; }
+    .scan { animation: scan 5.5s ease-in-out infinite; }
+    .shield { stroke-dasharray: 100; animation: draw 8s ease-in-out infinite; }
+    .tick { stroke-dasharray: 100; animation: tick 8s ease-in-out infinite; }
+    @keyframes march { to { stroke-dashoffset: -24; } }
+    @keyframes scan { 0% { transform: translateX(0); opacity: 0; } 8% { opacity: 1; } 62% { transform: translateX(680px); opacity: 1; } 70%, 100% { transform: translateX(680px); opacity: 0; } }
+    @keyframes draw { 0% { stroke-dashoffset: 100; } 30%, 100% { stroke-dashoffset: 0; } }
+    @keyframes tick { 0%, 30% { stroke-dashoffset: 100; } 45%, 100% { stroke-dashoffset: 0; } }
+    @keyframes wind { to { stroke-dashoffset: -44; } }
+    @keyframes bob { 0%, 100% { transform: translateY(3px); } 50% { transform: translateY(-5px); } }
     @media (prefers-reduced-motion: reduce) {
-      .tw { animation: none; }
-      .glide { animation: none; opacity: 0; }
+      .hero, .hero line, .trail line, .perim, .shield, .tick { animation: none !important; }
+      .scan, .motion { display: none; }
     }
   </style>
 
   <g clip-path="url(#frame)">
-    <rect width="1200" height="380" fill="url(#base)"/>
-    <rect width="1200" height="380" fill="url(#glow)"/>
-  </g>
-  <rect x="0.5" y="0.5" width="1199" height="379" rx="14" fill="none" stroke="#FFFFFF" stroke-opacity="0.00"/>
+    <rect width="1200" height="360" fill="url(#sky)"/>
+    <rect width="1200" height="360" fill="url(#glow)"/>
 
-  <!-- the cloud, one thin contour -->
-  <path d="M1068 318 H704 A80 80 0 1 1 718.5 159.3 A88 88 0 0 1 866.6 86.2 A102 102 0 0 1 1054.0 143.1 A88 88 0 1 1 1068.0 318.0 Z" fill="url(#skin)" stroke="url(#contour)" stroke-width="1.6" stroke-opacity="0.85" stroke-linejoin="round"/>
+    <!-- slipstream -->
+    <g class="trail" mask="url(#tm)" stroke="#E4E4E7" stroke-opacity="0.5" stroke-width="2.5" stroke-linecap="round">
+      <line x1="468" y1="118" x2="618" y2="118" stroke-dasharray="26 18" style="animation:wind 2.6s linear infinite;animation-delay:-0.0s"/>
+      <line x1="420" y1="150" x2="610" y2="150" stroke-dasharray="26 18" style="animation:wind 3.4s linear infinite;animation-delay:-0.5s"/>
+      <line x1="452" y1="186" x2="622" y2="186" stroke-dasharray="26 18" style="animation:wind 2.2s linear infinite;animation-delay:-1.0s"/>
+      <line x1="404" y1="222" x2="614" y2="222" stroke-dasharray="26 18" style="animation:wind 3.0s linear infinite;animation-delay:-1.5s"/>
+      <line x1="470" y1="258" x2="610" y2="258" stroke-dasharray="26 18" style="animation:wind 2.8s linear infinite;animation-delay:-2.0s"/>
+      <line x1="500" y1="290" x2="610" y2="290" stroke-dasharray="26 18" style="animation:wind 3.6s linear infinite;animation-delay:-2.5s"/>
+    </g>
 
-  <!-- the network: every layer joined to the next -->
-  <g stroke="#A9BAD6" stroke-opacity="0.20" stroke-width="0.8">
-    <line x1="676" y1="187.1" x2="764" y2="96.7"/>
-    <line x1="676" y1="187.1" x2="764" y2="146.0"/>
-    <line x1="676" y1="187.1" x2="764" y2="195.3"/>
-    <line x1="676" y1="187.1" x2="764" y2="244.7"/>
-    <line x1="676" y1="187.1" x2="764" y2="294.0"/>
-    <line x1="676" y1="238.0" x2="764" y2="96.7"/>
-    <line x1="676" y1="238.0" x2="764" y2="146.0"/>
-    <line x1="676" y1="238.0" x2="764" y2="195.3"/>
-    <line x1="676" y1="238.0" x2="764" y2="244.7"/>
-    <line x1="676" y1="238.0" x2="764" y2="294.0"/>
-    <line x1="676" y1="288.9" x2="764" y2="96.7"/>
-    <line x1="676" y1="288.9" x2="764" y2="146.0"/>
-    <line x1="676" y1="288.9" x2="764" y2="195.3"/>
-    <line x1="676" y1="288.9" x2="764" y2="244.7"/>
-    <line x1="676" y1="288.9" x2="764" y2="294.0"/>
-    <line x1="764" y1="96.7" x2="852" y2="99.0"/>
-    <line x1="764" y1="96.7" x2="852" y2="147.7"/>
-    <line x1="764" y1="96.7" x2="852" y2="196.5"/>
-    <line x1="764" y1="96.7" x2="852" y2="245.2"/>
-    <line x1="764" y1="96.7" x2="852" y2="294.0"/>
-    <line x1="764" y1="146.0" x2="852" y2="99.0"/>
-    <line x1="764" y1="146.0" x2="852" y2="147.7"/>
-    <line x1="764" y1="146.0" x2="852" y2="196.5"/>
-    <line x1="764" y1="146.0" x2="852" y2="245.2"/>
-    <line x1="764" y1="146.0" x2="852" y2="294.0"/>
-    <line x1="764" y1="195.3" x2="852" y2="99.0"/>
-    <line x1="764" y1="195.3" x2="852" y2="147.7"/>
-    <line x1="764" y1="195.3" x2="852" y2="196.5"/>
-    <line x1="764" y1="195.3" x2="852" y2="245.2"/>
-    <line x1="764" y1="195.3" x2="852" y2="294.0"/>
-    <line x1="764" y1="244.7" x2="852" y2="99.0"/>
-    <line x1="764" y1="244.7" x2="852" y2="147.7"/>
-    <line x1="764" y1="244.7" x2="852" y2="196.5"/>
-    <line x1="764" y1="244.7" x2="852" y2="245.2"/>
-    <line x1="764" y1="244.7" x2="852" y2="294.0"/>
-    <line x1="764" y1="294.0" x2="852" y2="99.0"/>
-    <line x1="764" y1="294.0" x2="852" y2="147.7"/>
-    <line x1="764" y1="294.0" x2="852" y2="196.5"/>
-    <line x1="764" y1="294.0" x2="852" y2="245.2"/>
-    <line x1="764" y1="294.0" x2="852" y2="294.0"/>
-    <line x1="852" y1="99.0" x2="940" y2="64.7"/>
-    <line x1="852" y1="99.0" x2="940" y2="110.6"/>
-    <line x1="852" y1="99.0" x2="940" y2="156.4"/>
-    <line x1="852" y1="99.0" x2="940" y2="202.3"/>
-    <line x1="852" y1="99.0" x2="940" y2="248.1"/>
-    <line x1="852" y1="99.0" x2="940" y2="294.0"/>
-    <line x1="852" y1="147.7" x2="940" y2="64.7"/>
-    <line x1="852" y1="147.7" x2="940" y2="110.6"/>
-    <line x1="852" y1="147.7" x2="940" y2="156.4"/>
-    <line x1="852" y1="147.7" x2="940" y2="202.3"/>
-    <line x1="852" y1="147.7" x2="940" y2="248.1"/>
-    <line x1="852" y1="147.7" x2="940" y2="294.0"/>
-    <line x1="852" y1="196.5" x2="940" y2="64.7"/>
-    <line x1="852" y1="196.5" x2="940" y2="110.6"/>
-    <line x1="852" y1="196.5" x2="940" y2="156.4"/>
-    <line x1="852" y1="196.5" x2="940" y2="202.3"/>
-    <line x1="852" y1="196.5" x2="940" y2="248.1"/>
-    <line x1="852" y1="196.5" x2="940" y2="294.0"/>
-    <line x1="852" y1="245.2" x2="940" y2="64.7"/>
-    <line x1="852" y1="245.2" x2="940" y2="110.6"/>
-    <line x1="852" y1="245.2" x2="940" y2="156.4"/>
-    <line x1="852" y1="245.2" x2="940" y2="202.3"/>
-    <line x1="852" y1="245.2" x2="940" y2="248.1"/>
-    <line x1="852" y1="245.2" x2="940" y2="294.0"/>
-    <line x1="852" y1="294.0" x2="940" y2="64.7"/>
-    <line x1="852" y1="294.0" x2="940" y2="110.6"/>
-    <line x1="852" y1="294.0" x2="940" y2="156.4"/>
-    <line x1="852" y1="294.0" x2="940" y2="202.3"/>
-    <line x1="852" y1="294.0" x2="940" y2="248.1"/>
-    <line x1="852" y1="294.0" x2="940" y2="294.0"/>
-    <line x1="940" y1="64.7" x2="1028" y2="98.0"/>
-    <line x1="940" y1="64.7" x2="1028" y2="147.0"/>
-    <line x1="940" y1="64.7" x2="1028" y2="196.0"/>
-    <line x1="940" y1="64.7" x2="1028" y2="245.0"/>
-    <line x1="940" y1="64.7" x2="1028" y2="294.0"/>
-    <line x1="940" y1="110.6" x2="1028" y2="98.0"/>
-    <line x1="940" y1="110.6" x2="1028" y2="147.0"/>
-    <line x1="940" y1="110.6" x2="1028" y2="196.0"/>
-    <line x1="940" y1="110.6" x2="1028" y2="245.0"/>
-    <line x1="940" y1="110.6" x2="1028" y2="294.0"/>
-    <line x1="940" y1="156.4" x2="1028" y2="98.0"/>
-    <line x1="940" y1="156.4" x2="1028" y2="147.0"/>
-    <line x1="940" y1="156.4" x2="1028" y2="196.0"/>
-    <line x1="940" y1="156.4" x2="1028" y2="245.0"/>
-    <line x1="940" y1="156.4" x2="1028" y2="294.0"/>
-    <line x1="940" y1="202.3" x2="1028" y2="98.0"/>
-    <line x1="940" y1="202.3" x2="1028" y2="147.0"/>
-    <line x1="940" y1="202.3" x2="1028" y2="196.0"/>
-    <line x1="940" y1="202.3" x2="1028" y2="245.0"/>
-    <line x1="940" y1="202.3" x2="1028" y2="294.0"/>
-    <line x1="940" y1="248.1" x2="1028" y2="98.0"/>
-    <line x1="940" y1="248.1" x2="1028" y2="147.0"/>
-    <line x1="940" y1="248.1" x2="1028" y2="196.0"/>
-    <line x1="940" y1="248.1" x2="1028" y2="245.0"/>
-    <line x1="940" y1="248.1" x2="1028" y2="294.0"/>
-    <line x1="940" y1="294.0" x2="1028" y2="98.0"/>
-    <line x1="940" y1="294.0" x2="1028" y2="147.0"/>
-    <line x1="940" y1="294.0" x2="1028" y2="196.0"/>
-    <line x1="940" y1="294.0" x2="1028" y2="245.0"/>
-    <line x1="940" y1="294.0" x2="1028" y2="294.0"/>
-    <line x1="1028" y1="98.0" x2="1116" y2="180.2"/>
-    <line x1="1028" y1="98.0" x2="1116" y2="230.0"/>
-    <line x1="1028" y1="98.0" x2="1116" y2="279.8"/>
-    <line x1="1028" y1="147.0" x2="1116" y2="180.2"/>
-    <line x1="1028" y1="147.0" x2="1116" y2="230.0"/>
-    <line x1="1028" y1="147.0" x2="1116" y2="279.8"/>
-    <line x1="1028" y1="196.0" x2="1116" y2="180.2"/>
-    <line x1="1028" y1="196.0" x2="1116" y2="230.0"/>
-    <line x1="1028" y1="196.0" x2="1116" y2="279.8"/>
-    <line x1="1028" y1="245.0" x2="1116" y2="180.2"/>
-    <line x1="1028" y1="245.0" x2="1116" y2="230.0"/>
-    <line x1="1028" y1="245.0" x2="1116" y2="279.8"/>
-    <line x1="1028" y1="294.0" x2="1116" y2="180.2"/>
-    <line x1="1028" y1="294.0" x2="1116" y2="230.0"/>
-    <line x1="1028" y1="294.0" x2="1116" y2="279.8"/>
+    <g class="hero">
+      <path d="M1087.8 308.8 H718.4 A75.6 75.6 0 1 1 727.2 158.1 A90.7 90.7 0 0 1 871.1 79.9 A108.0 108.0 0 0 1 1072.5 128.7 A90.7 90.7 0 1 1 1087.8 308.8 Z" fill="#6E7681" opacity="0.5" filter="url(#aura)"/>
+
+      <!-- perimeter and its patrol -->
+      <path class="perim" d="M602 196 A300 148 0 1 1 1202 196 A300 148 0 1 1 602 196" fill="none" stroke="#E4E4E7" stroke-opacity="0.55" stroke-width="1.3" stroke-linecap="round"/>
+      <g class="motion">
+        <circle r="10" fill="#FBBF24" opacity="0.35"><animateMotion dur="14s" repeatCount="indefinite" path="M602 196 A300 148 0 1 1 1202 196 A300 148 0 1 1 602 196"/></circle>
+        <circle r="4.5" fill="#FFFFFF"><animateMotion dur="14s" repeatCount="indefinite" path="M602 196 A300 148 0 1 1 1202 196 A300 148 0 1 1 602 196"/></circle>
+      </g>
+
+      <!-- the cloud: bands of light sliding inside its outline -->
+      <path d="M1087.8 308.8 H718.4 A75.6 75.6 0 1 1 727.2 158.1 A90.7 90.7 0 0 1 871.1 79.9 A108.0 108.0 0 0 1 1072.5 128.7 A90.7 90.7 0 1 1 1087.8 308.8 Z" fill="#FFFFFF" fill-opacity="0.07"/>
+      <g clip-path="url(#shape)" stroke="url(#band)" stroke-width="11" stroke-linecap="round">
+      <line x1="560" y1="41" x2="1240" y2="41" stroke-dasharray="110 16 150 16 76 30 76 16" stroke-opacity="1.0" style="animation:slide0 11s linear infinite;animation-delay:-9.9s"/>
+      <line x1="560" y1="62" x2="1240" y2="62" stroke-dasharray="34 30 76 16 150 30 150 22" stroke-opacity="1.0" style="animation:slide1 9s linear infinite;animation-delay:-8.6s"/>
+      <line x1="560" y1="83" x2="1240" y2="83" stroke-dasharray="110 16 52 16 52 16 52 30" stroke-opacity="0.55" style="animation:slide2 16s linear infinite;animation-delay:-12.4s"/>
+      <line x1="560" y1="104" x2="1240" y2="104" stroke-dasharray="110 16 190 30 34 16 76 30" stroke-opacity="0.55" style="animation:slide3 13s linear infinite;animation-delay:-10.0s"/>
+      <line x1="560" y1="125" x2="1240" y2="125" stroke-dasharray="52 16 110 16 76 30 76 16" stroke-opacity="0.55" style="animation:slide4 13s linear infinite;animation-delay:-11.6s"/>
+      <line x1="560" y1="146" x2="1240" y2="146" stroke-dasharray="110 22 52 30 34 16 52 30" stroke-opacity="0.55" style="animation:slide5 7s linear infinite;animation-delay:-5.4s"/>
+      <line x1="560" y1="167" x2="1240" y2="167" stroke-dasharray="52 16 52 16 76 30 34 16" stroke-opacity="0.55" style="animation:slide6 16s linear infinite;animation-delay:-9.2s"/>
+      <line x1="560" y1="188" x2="1240" y2="188" stroke-dasharray="150 22 52 16 110 30 34 16" stroke-opacity="0.7" style="animation:slide7 16s linear infinite;animation-delay:-2.8s"/>
+      <line x1="560" y1="209" x2="1240" y2="209" stroke-dasharray="150 22 190 30 34 30 34 30" stroke-opacity="0.85" style="animation:slide8 9s linear infinite;animation-delay:-6.6s"/>
+      <line x1="560" y1="230" x2="1240" y2="230" stroke-dasharray="150 22 34 16 34 16 190 30" stroke-opacity="0.55" style="animation:slide9 16s linear infinite;animation-delay:-11.8s"/>
+      <line x1="560" y1="251" x2="1240" y2="251" stroke-dasharray="190 30 150 16 150 22 150 16" stroke-opacity="0.85" style="animation:slide10 16s linear infinite;animation-delay:-7.2s"/>
+      <line x1="560" y1="272" x2="1240" y2="272" stroke-dasharray="110 16 52 22 150 30 190 22" stroke-opacity="1.0" style="animation:slide11 7s linear infinite;animation-delay:-0.8s"/>
+      <line x1="560" y1="293" x2="1240" y2="293" stroke-dasharray="52 16 110 22 76 30 76 22" stroke-opacity="0.55" style="animation:slide12 7s linear infinite;animation-delay:-0.2s"/>
+      </g>
+      <path d="M1087.8 308.8 H718.4 A75.6 75.6 0 1 1 727.2 158.1 A90.7 90.7 0 0 1 871.1 79.9 A108.0 108.0 0 0 1 1072.5 128.7 A90.7 90.7 0 1 1 1087.8 308.8 Z" fill="none" stroke="url(#rimlight)" stroke-width="1.6"/>
+
+      <!-- scan beam -->
+      <g clip-path="url(#shape)">
+        <g class="scan">
+          <rect x="532" y="0" width="90" height="360" fill="url(#beam)"/>
+          <rect x="620" y="0" width="2" height="360" fill="#FFFFFF" opacity="0.85"/>
+        </g>
+      </g>
+
+      <!-- shield -->
+      <g transform="translate(902 202)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M0 -52 L40 -38 V-6 C40 24 21 42 0 51 C-21 42 -40 24 -40 -6 V-38 Z" fill="#232327" fill-opacity="0.55" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="1.5"/>
+        <path class="shield" pathLength="100" d="M0 -52 L40 -38 V-6 C40 24 21 42 0 51 C-21 42 -40 24 -40 -6 V-38 Z" stroke-width="3.2"/>
+        <path class="tick" pathLength="100" d="M-18 -3 L-5 10 L19 -16" stroke-width="4.5"/>
+      </g>
+    </g>
+
+    <!-- threats, stopped at the perimeter -->
+    <g class="motion">
+      <g opacity="0">
+        <circle r="8" fill="#F87171" opacity="0.3"/><circle r="3.4" fill="#F87171"/>
+        <animateMotion dur="6.5s" begin="0.00s" repeatCount="indefinite" path="M850 -20 L866.6 49.0" keyPoints="0;1;1" keyTimes="0;0.4;1" calcMode="linear"/>
+        <animate attributeName="opacity" dur="6.5s" begin="0.00s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.05;0.4;0.44;1"/>
+      </g>
+      <circle cx="866.6" cy="49.0" r="3" fill="none" stroke="#F87171" stroke-width="2" opacity="0">
+        <animate attributeName="r" dur="6.5s" begin="0.00s" repeatCount="indefinite" values="3;3;20;20" keyTimes="0;0.4;0.56;1"/>
+        <animate attributeName="opacity" dur="6.5s" begin="0.00s" repeatCount="indefinite" values="0;0;1;0;0" keyTimes="0;0.39;0.4;0.56;1"/>
+      </circle>
+    </g>
+    <g class="motion">
+      <g opacity="0">
+        <circle r="8" fill="#F87171" opacity="0.3"/><circle r="3.4" fill="#F87171"/>
+        <animateMotion dur="6.5s" begin="-1.30s" repeatCount="indefinite" path="M1215 -10 L1081.9 77.6" keyPoints="0;1;1" keyTimes="0;0.4;1" calcMode="linear"/>
+        <animate attributeName="opacity" dur="6.5s" begin="-1.30s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.05;0.4;0.44;1"/>
+      </g>
+      <circle cx="1081.9" cy="77.6" r="3" fill="none" stroke="#F87171" stroke-width="2" opacity="0">
+        <animate attributeName="r" dur="6.5s" begin="-1.30s" repeatCount="indefinite" values="3;3;20;20" keyTimes="0;0.4;0.56;1"/>
+        <animate attributeName="opacity" dur="6.5s" begin="-1.30s" repeatCount="indefinite" values="0;0;1;0;0" keyTimes="0;0.39;0.4;0.56;1"/>
+      </circle>
+    </g>
+    <g class="motion">
+      <g opacity="0">
+        <circle r="8" fill="#F87171" opacity="0.3"/><circle r="3.4" fill="#F87171"/>
+        <animateMotion dur="6.5s" begin="-2.60s" repeatCount="indefinite" path="M1215 372 L1099.9 307.3" keyPoints="0;1;1" keyTimes="0;0.4;1" calcMode="linear"/>
+        <animate attributeName="opacity" dur="6.5s" begin="-2.60s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.05;0.4;0.44;1"/>
+      </g>
+      <circle cx="1099.9" cy="307.3" r="3" fill="none" stroke="#F87171" stroke-width="2" opacity="0">
+        <animate attributeName="r" dur="6.5s" begin="-2.60s" repeatCount="indefinite" values="3;3;20;20" keyTimes="0;0.4;0.56;1"/>
+        <animate attributeName="opacity" dur="6.5s" begin="-2.60s" repeatCount="indefinite" values="0;0;1;0;0" keyTimes="0;0.39;0.4;0.56;1"/>
+      </circle>
+    </g>
+    <g class="motion">
+      <g opacity="0">
+        <circle r="8" fill="#F87171" opacity="0.3"/><circle r="3.4" fill="#F87171"/>
+        <animateMotion dur="6.5s" begin="-3.90s" repeatCount="indefinite" path="M1000 380 L978.2 339.1" keyPoints="0;1;1" keyTimes="0;0.4;1" calcMode="linear"/>
+        <animate attributeName="opacity" dur="6.5s" begin="-3.90s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.05;0.4;0.44;1"/>
+      </g>
+      <circle cx="978.2" cy="339.1" r="3" fill="none" stroke="#F87171" stroke-width="2" opacity="0">
+        <animate attributeName="r" dur="6.5s" begin="-3.90s" repeatCount="indefinite" values="3;3;20;20" keyTimes="0;0.4;0.56;1"/>
+        <animate attributeName="opacity" dur="6.5s" begin="-3.90s" repeatCount="indefinite" values="0;0;1;0;0" keyTimes="0;0.39;0.4;0.56;1"/>
+      </circle>
+    </g>
+    <g class="motion">
+      <g opacity="0">
+        <circle r="8" fill="#F87171" opacity="0.3"/><circle r="3.4" fill="#F87171"/>
+        <animateMotion dur="6.5s" begin="-5.20s" repeatCount="indefinite" path="M700 -20 L776.3 61.6" keyPoints="0;1;1" keyTimes="0;0.4;1" calcMode="linear"/>
+        <animate attributeName="opacity" dur="6.5s" begin="-5.20s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.05;0.4;0.44;1"/>
+      </g>
+      <circle cx="776.3" cy="61.6" r="3" fill="none" stroke="#F87171" stroke-width="2" opacity="0">
+        <animate attributeName="r" dur="6.5s" begin="-5.20s" repeatCount="indefinite" values="3;3;20;20" keyTimes="0;0.4;0.56;1"/>
+        <animate attributeName="opacity" dur="6.5s" begin="-5.20s" repeatCount="indefinite" values="0;0;1;0;0" keyTimes="0;0.39;0.4;0.56;1"/>
+      </circle>
+    </g>
   </g>
-  <path d="M676 238.0 L764 195.3 L852 196.5 L940 156.4 L1028 196.0 L1116 230.0" fill="none" stroke="#7FB2FF" stroke-width="1.2" stroke-opacity="0.55" stroke-linejoin="round"/>
-  <path class="glide g0" d="M676 238.0 L764 195.3 L852 196.5 L940 156.4 L1028 196.0 L1116 230.0" pathLength="1000" fill="none" stroke="#F1F6FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M676 187.1 L764 146.0 L852 147.7 L940 110.6 L1028 147.0 L1116 180.2" fill="none" stroke="#7FB2FF" stroke-width="1.2" stroke-opacity="0.55" stroke-linejoin="round"/>
-  <path class="glide g1" d="M676 187.1 L764 146.0 L852 147.7 L940 110.6 L1028 147.0 L1116 180.2" pathLength="1000" fill="none" stroke="#F1F6FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M676 288.9 L764 244.7 L852 245.2 L940 248.1 L1028 245.0 L1116 279.8" fill="none" stroke="#7FB2FF" stroke-width="1.2" stroke-opacity="0.55" stroke-linejoin="round"/>
-  <path class="glide g2" d="M676 288.9 L764 244.7 L852 245.2 L940 248.1 L1028 245.0 L1116 279.8" pathLength="1000" fill="none" stroke="#F1F6FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <g fill="#7FB2FF" opacity="0.08">
-    <circle class="tw t0" cx="676" cy="238.0" r="11"/>
-    <circle class="tw t1" cx="764" cy="195.3" r="11"/>
-    <circle class="tw t2" cx="852" cy="196.5" r="11"/>
-    <circle class="tw t0" cx="940" cy="156.4" r="11"/>
-    <circle class="tw t1" cx="1028" cy="196.0" r="11"/>
-  </g>
-  <g fill="#D8E2F1">
-    <circle cx="764" cy="96.7" r="3"/>
-    <circle cx="764" cy="294.0" r="3"/>
-    <circle cx="852" cy="99.0" r="3"/>
-    <circle cx="852" cy="294.0" r="3"/>
-    <circle cx="940" cy="64.7" r="3"/>
-    <circle cx="940" cy="202.3" r="3"/>
-    <circle cx="940" cy="294.0" r="3"/>
-    <circle cx="1028" cy="98.0" r="3"/>
-    <circle cx="1028" cy="294.0" r="3"/>
-  </g>
-  <g fill="#7FB2FF">
-    <circle cx="676" cy="187.1" r="3.6"/>
-    <circle cx="676" cy="238.0" r="3.6"/>
-    <circle cx="676" cy="288.9" r="3.6"/>
-    <circle cx="764" cy="146.0" r="3.6"/>
-    <circle cx="764" cy="195.3" r="3.6"/>
-    <circle cx="764" cy="244.7" r="3.6"/>
-    <circle cx="852" cy="147.7" r="3.6"/>
-    <circle cx="852" cy="196.5" r="3.6"/>
-    <circle cx="852" cy="245.2" r="3.6"/>
-    <circle cx="940" cy="110.6" r="3.6"/>
-    <circle cx="940" cy="156.4" r="3.6"/>
-    <circle cx="940" cy="248.1" r="3.6"/>
-    <circle cx="1028" cy="147.0" r="3.6"/>
-    <circle cx="1028" cy="196.0" r="3.6"/>
-    <circle cx="1028" cy="245.0" r="3.6"/>
-    <circle cx="1116" cy="180.2" r="3.6"/>
-    <circle cx="1116" cy="279.8" r="3.6"/>
-  </g>
-  <circle cx="1116" cy="230.0" r="11" fill="none" stroke="#E6BE8A" stroke-opacity="0.6" stroke-width="1.2"/>
-  <circle cx="1116" cy="230.0" r="4.2" fill="#E6BE8A"/>
+  <rect x="0.5" y="0.5" width="1199" height="359" rx="16" fill="none" stroke="#FFFFFF" stroke-opacity="0.00"/>
 
   <!-- identity -->
-  <rect x="72" y="111" width="30" height="1.5" fill="#7FB2FF" opacity="0.9"/>
-  <text x="116" y="117" class="sans" font-size="13" font-weight="600" letter-spacing="3.4" fill="#9DB6DC">CLOUD SECURITY ENGINEER</text>
-  <text x="69" y="198" class="sans" font-size="78" font-weight="600" letter-spacing="-2" fill="#F4F7FB">Ahmed Hany</text>
-  <text x="72" y="240" class="sans" font-size="22" fill="#A8B5CB">Detection and response engineering</text>
-  <rect x="72" y="266" width="350" height="1" fill="#FFFFFF" opacity="0.14"/>
-  <text x="72" y="298" class="sans" font-size="12.5" font-weight="600" letter-spacing="3" fill="#C6D1E3">AWS<tspan dx="16" fill="#5E6E8C">/</tspan><tspan dx="16">AZURE</tspan><tspan dx="16" fill="#5E6E8C">/</tspan><tspan dx="16">KUBERNETES</tspan></text>
+  <text x="72" y="112" class="sans" font-size="13" font-weight="600" letter-spacing="3.6" fill="#FBBF24">CLOUD SECURITY ENGINEER</text>
+  <text x="68" y="196" class="sans" font-size="82" font-weight="700" letter-spacing="-2.6" fill="#FFFFFF">Ahmed Hany</text>
+  <text x="72" y="238" class="sans" font-size="22" fill="#C4C4CC">Detection and response engineering</text>
+  <text x="72" y="292" class="sans" font-size="12.5" font-weight="600" letter-spacing="3" fill="#E4E4E7">AWS<tspan dx="14" fill="#71717A">/</tspan><tspan dx="14">AZURE</tspan><tspan dx="14" fill="#71717A">/</tspan><tspan dx="14">KUBERNETES</tspan></text>
 </svg>

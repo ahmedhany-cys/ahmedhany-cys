@@ -8,8 +8,8 @@
     assets/banner-dark.svg, assets/banner-light.svg   GitHub swaps them by theme through <picture>
     assets/work/*.svg                                  one 16:9 cover per project, in a window frame
     scripts/build_assets.py                            rebuilds all of the above (screenshots live in assets/src/)
-  Banner: line art of a neural network inside a cloud, navy in both themes (a shade lighter in light mode).
-  Keep it quiet: thin lines, small nodes, one blue accent, one warm node, slow light.
+  Banner: an animated cloud made of sliding bands, with a shield, a scan beam, a patrolled perimeter and
+  blocked threats. Graphite with one amber accent: near-black in dark mode, charcoal in light mode.
   Pull request status badges are live from shields.io, so add a row and never edit a status by hand.
 -->
 
